@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AML Secure | Blockchain Security</title>
+    <title>GlobalAML</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -20,7 +20,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
-                <span class="logo-text">AML<span class="logo-highlight">Secure</span></span>
+                <span class="logo-text" data-translate="logo">Global<span class="logo-highlight" data-translate="secure">AML</span></span>
             </div>
 
             <nav class="nav-menu">
@@ -29,23 +29,29 @@
                 <a href="#" class="nav-link" data-translate="analysis">Analysis</a>
                 <a href="#" class="nav-link" data-translate="blog">Blog</a>
                 <a href="#" class="nav-link" data-translate="about">About Us</a>
+                <a href="#" class="nav-link" data-translate="support">Support</a>
             </nav>
 
             <div class="header-actions">
+                <button class="header-wallet-btn">
+                    <i class="fas fa-wallet"></i>
+                    <span data-translate="wallet">Connect Wallet</span>
+                </button>
                 <div class="language-selector">
-                    <button class="language-btn">
+                    <button class="language-btn" id="languageToggle" aria-expanded="false">
                         <i class="fas fa-globe"></i>
                         <span class="current-lang">EN</span>
+                        <i class="fas fa-chevron-down ml-2"></i>
                     </button>
-                    <div class="language-dropdown">
-                        <a href="#" class="language-option" data-lang="en">
+                    <div class="language-dropdown" id="languageMenu" role="menu" aria-hidden="true">
+                        <div class="language-option" data-lang="en" role="menuitem" tabindex="0">
                             <span class="lang-flag">🇺🇸</span>
                             <span class="lang-name">English</span>
-                        </a>
-                        <a href="#" class="language-option" data-lang="ru">
+                        </div>
+                        <div class="language-option" data-lang="ru" role="menuitem" tabindex="0">
                             <span class="lang-flag">🇷🇺</span>
                             <span class="lang-name">Русский</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,53 +79,74 @@
                 <i class="fas fa-briefcase"></i>
                 For Business
             </div>
-            <div class="feature-badge" data-translate="personal">
-                <i class="fas fa-user"></i>
-                For Personal Use
+            <div class="feature-badge" data-translate="business">
+                <i class="fas fa-briefcase"></i>
+                For Business
             </div>
-            <div class="feature-badge" data-translate="automation">
-                <i class="fas fa-robot"></i>
-                Automation
+            <div class="feature-badge" data-translate="business">
+                <i class="fas fa-briefcase"></i>
+                For Business
             </div>
-            <div class="feature-badge" data-translate="reporting">
-                <i class="fas fa-chart-bar"></i>
-                Reporting
+            <div class="feature-badge" data-translate="business">
+                <i class="fas fa-briefcase"></i>
+                For Business
             </div>
-            <div class="feature-badge" data-translate="savings">
-                <i class="fas fa-piggy-bank"></i>
-                Cost Savings
+            <div class="feature-badge" data-translate="business">
+                <i class="fas fa-briefcase"></i>
+                For Business
             </div>
         </div>
 
-        <section class="partners">
-            <h2 class="partners-title">The major players of the crypto market trust us!</h2>
-            <div class="partners-slider">
-                <div class="partners-track">
-                    <div class="partner-logo">
-                        <h3>Spherule</h3>
-                        <img class="partner-logo-image" src="/api/placeholder/200/100" alt="Spherule" />
+        <section class="testimonials">
+            <div class="testimonials-container">
+                <h2 class="section-title">Предпочитается лучшими командами,<br/>Откройте для себя нашу историю о <span class="x-logo">𝕏</span> ...</h2>
+                
+                <div class="testimonials-slider">
+                    <div class="testimonials-track">
+                        <!-- Карточка 1 -->
+                        <div class="testimonial-card">
+                            <img src="/api/placeholder/150/50" alt="Polygon" class="company-logo" />
+                            <p class="testimonial-text">«Представьте себе, что вы как дом, вы здание. Тогда GetBlock будет надежная основа для этого, предлагая различные "инфраструктурные пакеты" в зависимости от ваших потребностей».</p>
+                            <div class="author-info">
+                                <span class="author-name">Шить</span>
+                                <span class="author-position">Специалист по взаимодействию с клиентами</span>
+                            </div>
+                        </div>
+        
+                        <!-- Карточка 2 -->
+                        <div class="testimonial-card">
+                            <img src="/api/placeholder/150/50" alt="Lossless" class="company-logo" />
+                            <p class="testimonial-text">«Используя их инфраструктуру, наша Система интеллекта цепной угрозы имеет значительно выиграл от Бесплатный доступ к данным в реальном времени».</p>
+                            <div class="author-info">
+                                <span class="author-name">Domantas Pelaitis</span>
+                                <span class="author-position">Технический директор</span>
+                            </div>
+                        </div>
+        
+                        <!-- Карточка 3 -->
+                        <div class="testimonial-card">
+                            <img src="/api/placeholder/150/50" alt="Tangem" class="company-logo" />
+                            <p class="testimonial-text">«GetBlock предоставляет нам простые единый сервис, который предлагает доступ к Много сетей».</p>
+                            <div class="author-info">
+                                <span class="author-name">Андрей Лазуткин</span>
+                                <span class="author-position">Разработчик</span>
+                            </div>
+                        </div>
+        
+                        <!-- Дублированные карточки для бесконечной прокрутки -->
+                        <div class="testimonial-card">
+                            <img src="/api/placeholder/150/50" alt="Polygon" class="company-logo" />
+                            <p class="testimonial-text">«Представьте себе, что вы как дом, вы здание. Тогда GetBlock будет надежная основа для этого, предлагая различные "инфраструктурные пакеты" в зависимости от ваших потребностей».</p>
+                            <div class="author-info">
+                                <span class="author-name">Шить</span>
+                                <span class="author-position">Специалист по взаимодействию с клиентами</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="partner-logo">
-                        <h3>Lightbox</h3>
-                        <img class="partner-logo-image" src="/api/placeholder/200/100" alt="Lightbox" />
-                    </div>
-                    <div class="partner-logo">
-                        <h3>FeatherDev</h3>
-                        <img class="partner-logo-image" src="/api/placeholder/200/100" alt="FeatherDev" />
-                    </div>
-                    <!-- Duplicated for infinite scroll -->
-                    <div class="partner-logo">
-                        <h3>Spherule</h3>
-                        <img class="partner-logo-image" src="/api/placeholder/200/100" alt="Spherule" />
-                    </div>
-                    <div class="partner-logo">
-                        <h3>Lightbox</h3>
-                        <img class="partner-logo-image" src="/api/placeholder/200/100" alt="Lightbox" />
-                    </div>
-                    <div class="partner-logo">
-                        <h3>FeatherDev</h3>
-                        <img class="partner-logo-image" src="/api/placeholder/200/100" alt="FeatherDev" />
-                    </div>
+                </div>
+                
+                <div class="explore-more">
+                    <a href="#" class="explore-link">Исследовать <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -178,6 +205,47 @@
             </div>
         </section>
 
+
+        <section class="dedicated-node">
+            <div class="dedicated-node-container">
+                <div class="node-content">
+                    <h2 class="node-title" data-translate="node-title">Выделенный узел</h2>
+                    <p class="node-subtitle" data-translate="node-subtitle">Частный сервер с пользовательскими настройками</p>
+                    
+                    <div class="node-features">
+                        <div class="feature-column">
+                            <span class="feature-label">Запросы</span>
+                            <span class="feature-value">Неограниченный</span>
+                        </div>
+                        <div class="feature-divider"></div>
+                        <div class="feature-column">
+                            <span class="feature-label">Ограничение ставки</span>
+                            <span class="feature-value">Неограниченный</span>
+                        </div>
+                        <div class="feature-divider"></div>
+                        <div class="feature-column">
+                            <span class="feature-label">Данные</span>
+                            <span class="feature-value">Архив</span>
+                        </div>
+                    </div>
+                    
+                    <div class="node-pricing">
+                        <div class="price-wrapper">
+                            <span class="price-prefix">Начиная с</span>
+                            <span class="price-amount">600</span>
+                            <span class="price-suffix">долларов в месяц</span>
+                        </div>
+                    </div>
+                    
+                    <div class="node-actions">
+                        <button class="btn-learn-more">Узнать больше</button>
+                        <button class="btn-get-started">Начните строить</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
         <section class="pricing" data-translate="pricing-section">
             <h2 class="pricing-title" data-translate="pricing-title">Service Prices</h2>
             <p class="pricing-subtitle" data-translate="pricing-subtitle">A wide range for any business</p>
@@ -228,6 +296,38 @@
                         <!-- Add features -->
                     </ul>
                     <button class="select-plan-btn" data-translate="get-started">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="statistics">
+            <div class="statistics-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-number">100,000+</div>
+                        <div class="stat-label">Активные пользователи</div>
+                    </div>
+        
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-number">50 миллиардов+</div>
+                        <div class="stat-label">API-запросы обрабатываются ежемесячно</div>
+                    </div>
+        
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-number">2019</div>
+                        <div class="stat-label">Компания запущена</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -348,11 +448,11 @@
          <section class="start-checking">
             <div class="start-container">
                 <div class="start-content">
-                    <h2>Start checking payments today</h2>
-                    <p>Apply for connection and start verifying cryptocurrency now!</p>
+                    <h2 data-translate="start-checking-title">Start checking payments today</h2>
+                    <p data-translate="start-checking-desc">Apply for connection and start verifying cryptocurrency now!</p>
                     <button class="check-wallet-btn">
                         <i class="fas fa-wallet"></i>
-                        <span>Check Wallet</span>
+                        <span data-translate="check-wallet">Check Wallet</span>
                     </button>
                 </div>
                 <div class="transactions-preview">
