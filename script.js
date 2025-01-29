@@ -428,6 +428,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // Отменяем стандартное поведение ссылки
+
+            const targetId = this.getAttribute('href').substring(1); // Получаем id цели
+            const targetElement = document.getElementById(targetId); // Находим элемент по id
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth', // Плавная прокрутка
+                    block: 'start' // Прокрутка к началу элемента
+                });
+            }
+        });
+    });
+
     // Эффект прокрутки для header
     const header = document.querySelector('.header');
     let lastScroll = 0;
