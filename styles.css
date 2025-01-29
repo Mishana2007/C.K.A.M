@@ -514,6 +514,26 @@ body {
     gap: 1rem;
 }
 
+/* .header-wallet-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+} */
+
+/* .header-wallet-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+} */
+
 .header-wallet-btn {
     display: flex;
     align-items: center;
@@ -529,10 +549,36 @@ body {
     transition: var(--transition);
 }
 
+.header-wallet-btn i {
+    font-size: 18px; /* Размер шрифта иконки */
+}
+
+.header-wallet-btn span {
+    display: inline-block; /* Текст отображается как блочный элемент */
+}
+
+
 .header-wallet-btn:hover {
     background: var(--primary-hover);
     transform: translateY(-2px);
 }
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 768px) {
+    .header-wallet-btn {
+        padding: 0.3rem 0.8rem; /* Уменьшаем отступы */
+        font-size: 0.8rem; /* Уменьшаем размер шрифта */
+        gap: 0.3rem; /* Уменьшаем расстояние между иконкой и текстом */
+    }
+
+    .header-wallet-btn i {
+        font-size: 16px; /* Уменьшаем размер иконки на мобильных устройствах */
+    }
+    .header-wallet-btn span {
+        display: none; /* Скрываем текст на мобильных устройствах */
+    }
+}
+
 
 .select-plan-btn {
     width: 100%;
