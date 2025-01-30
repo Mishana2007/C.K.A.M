@@ -18,11 +18,6 @@
 }
 
 
-html {
-    scroll-behavior: smooth;
-}
-
-
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-light);
@@ -568,6 +563,12 @@ body {
     transform: translateY(-2px);
 }
 
+
+
+html {
+    scroll-behavior: smooth;
+}
+
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 768px) {
     .header-wallet-btn {
@@ -1040,11 +1041,18 @@ body {
     }
 }
 
-
+.start-checking,
+.contact-channels {
+    padding: 50px 0; /* или любое другое значение */
+}
 
 .solutions, .start-checking {
     background: var(--bg-light);
     padding: 6rem 0;
+}
+
+.start-checking {
+    margin-bottom: 50px; /* или любое другое значение */
 }
 
 
@@ -1081,6 +1089,10 @@ body {
     margin-bottom: 2.5rem;
 }
 
+#support {
+    margin-top: 10px; /* Уменьшите значение по вашему вкусу */
+}
+
 .check-wallet-btn {
     display: inline-flex;
     align-items: center;
@@ -1089,6 +1101,7 @@ body {
     background: var(--primary-color);
     color: var(--white);
     border: none;
+    margin-bottom: 10px;
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: 500;
@@ -1561,7 +1574,7 @@ body {
 
 
 .testimonials {
-    padding: 4rem 2rem;
+    padding: 40px 0;
     background-color: #f8f9fa;
     overflow: hidden;
 }
@@ -1569,7 +1582,12 @@ body {
 .testimonials-container {
     text-align: center;
             max-width: 1400px; /* Ограничение максимальной ширины контейнера */
-            width: 100%; /* Убедимся, что контейнер занимает всю ширину на мобильных устройствах */
+            width: 100%;
+            
+            margin: 0 auto;
+    overflow: hidden; 
+
+    padding: 20px;/* Убедимся, что контейнер занимает всю ширину на мобильных устройствах */
 }
 
 .section-title {
@@ -1596,12 +1614,18 @@ body {
     position: relative;
     overflow: hidden;
     padding: 2rem 0;
+    min-height: 300px; /* Убедитесь, что высота достаточна */
+    /* position: relative;
+    overflow: hidden; */
 }
+
 
 .testimonials-track {
     display: flex;
-    gap: 2rem;
-    animation: scroll 40s linear infinite;
+    gap: 20px;
+    
+    transform: translateX(0);
+    transition: transform 0.5s ease;
 }
 
 .testimonial-card {
@@ -1610,40 +1634,63 @@ body {
 
     flex: 0 0 400px;
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-medium) 100%);
-    border-radius: 24px;
+    border-radius: 10px;
     padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); */
     display: flex;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
     flex-direction: column;
     gap: 1.5rem;
+    min-width: 100%;
+    /* flex-shrink: 0; */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .company-logo {
-    height: 40px;
+    height: 50px;
     object-fit: contain;
+    /* margin-bottom: 20px; */
+    width: 100px;
+    margin-bottom: 15px;
 }
 
 .testimonial-text {
-    font-size: 1.1rem;
+    font-size: 14px;
     line-height: 1.6;
+    margin-bottom: 15px;
     color: #333;
     flex-grow: 1;
 }
 
 .author-info {
     display: flex;
+    font-size: 12px;
     flex-direction: column;
     gap: 0.25rem;
 }
 
+
+@keyframes scrollTestimonials {
+    /* ... */
+}
+
+.testimonials-track {
+    animation: scrollTestimonials 30s linear infinite;
+}
+
 .author-name {
-    font-weight: 600;
+    font-weight: bold;
     color: #1a1a1a;
 }
 
 .author-position {
     font-size: 0.9rem;
     color: #666;
+    display: block;
+    margin-top: 5px;
 }
 
 .explore-more {
@@ -1669,7 +1716,7 @@ body {
 
 .contact-channels {
     padding: 6rem 2rem;
-    margin-top: 20px;
+    margin-top: 10px;
     background: var(--white);
     position: relative;
 }
