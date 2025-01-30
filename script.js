@@ -505,6 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', function() {
     const track = document.querySelector('.testimonials-track');
     const cards = document.querySelectorAll('.testimonial-card');
+    let currentIndex = 0;
     
     // Клонируем карточки для бесконечной прокрутки
     function cloneCards() {
@@ -514,39 +515,118 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Обработчик для сброса позиции
-    function checkScroll() {
-        if (track.offsetWidth / 2 >= -track.offsetLeft) {
-            track.style.animation = 'none';
-            track.offsetHeight; // Форсируем reflow
-            track.style.animation = 'scrollTestimonials 30s linear infinite';
+    // Создаем и добавляем кнопки навигации
+    const prevButton = document.createElement('button');
+    prevButton.className = 'nav-button prev';
+    prevButton.innerHTML = '←';
+    
+    const nextButton = document.createElement('button');
+    nextButton.className = 'nav-button next';
+    nextButton.innerHTML = '→';
+    
+    track.parentElement.appendChild(prevButton);
+    track.parentElement.appendChild(nextButton);
+    
+    // Функция для перехода к следующему слайду
+    function nextSlide() {
+        currentIndex++;
+        if (currentIndex >= cards.length) {
+            currentIndex = 0;
+            track.style.transition = 'none';
+            track.style.transform = `translateX(0)`;
+            // Форсируем reflow
+            track.offsetHeight;
         }
+        track.style.transition = 'transform 0.5s ease';
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
     
-    // Инициализация
-    cloneCards();
-    track.addEventListener('animationiteration', checkScroll);
+    // Функция для перехода к предыдущему слайду
+    function prevSlide() {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = cards.length - 1;
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${cards.length * 100}%)`;
+            // Форсируем reflow
+            track.offsetHeight;
+        }
+        track.style.transition = 'transform 0.5s ease';
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
     
-    // Добавляем touch-события для мобильных устройств
+    // Добавляем обработчики для кнопок
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    
+    // Обработка touch-событий
     let touchStart = null;
-    let currentTranslate = 0;
+    let startX = 0;
     
     track.addEventListener('touchstart', (e) => {
         touchStart = e.touches[0].clientX;
-        track.style.animationPlayState = 'paused';
+        startX = currentIndex * -100;
+        track.style.transition = 'none';
     }, { passive: true });
     
     track.addEventListener('touchmove', (e) => {
         if (!touchStart) return;
-        
         const touch = e.touches[0];
-        const diff = touch.clientX - touchStart;
-        
-        track.style.transform = `translateX(${currentTranslate + diff}px)`;
+        const diff = (touch.clientX - touchStart) / track.offsetWidth * 100;
+        const newX = startX + diff;
+        track.style.transform = `translateX(${newX}%)`;
     }, { passive: true });
     
-    track.addEventListener('touchend', () => {
+    track.addEventListener('touchend', (e) => {
+        if (!touchStart) return;
+        const diff = e.changedTouches[0].clientX - touchStart;
+        
+        if (Math.abs(diff) > 50) { // Минимальное расстояние для свайпа
+            if (diff > 0) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
+        } else {
+            // Возвращаемся к текущему слайду, если свайп был недостаточным
+            track.style.transition = 'transform 0.5s ease';
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        
         touchStart = null;
-        track.style.animationPlayState = 'running';
     });
+    
+    // Добавляем CSS для кнопок
+    const style = document.createElement('style');
+    style.textContent = `
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background: #f0f0f0;
+        }
+        .nav-button.prev {
+            left: 10px;
+        }
+        .nav-button.next {
+            right: 10px;
+        }
+        .testimonials-track {
+            transition: transform 0.5s ease;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Инициализация
+    cloneCards();
 });
