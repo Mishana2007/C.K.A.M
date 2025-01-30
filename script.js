@@ -503,100 +503,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.carousel-track');
-    const cards = document.querySelectorAll('.feedback-card');
-    const dotsContainer = document.querySelector('.carousel-dots');
-    let startX = 0;
-    let currentTranslate = 0;
-    let currentIndex = 0;
-    const cardWidth = cards[0].offsetWidth + 20; // Including margin
-  
-    // Create dots
-    cards.forEach((_, index) => {
-      const dot = document.createElement('div');
-      dot.classList.add('carousel-dot');
-      if(index === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => slideTo(index));
-      dotsContainer.appendChild(dot);
-    });
-  
-    // Touch events
-    track.addEventListener('touchstart', handleTouchStart);
-    track.addEventListener('touchmove', handleTouchMove);
-    track.addEventListener('touchend', handleTouchEnd);
-  
-    // Mouse events
-    track.addEventListener('mousedown', handleMouseStart);
-    track.addEventListener('mousemove', handleMouseMove);
-    track.addEventListener('mouseup', handleMouseEnd);
-    track.addEventListener('mouseleave', handleMouseEnd);
-  
-    function handleTouchStart(e) {
-      startX = e.touches[0].clientX;
-    }
-  
-    function handleTouchMove(e) {
-      if(!startX) return;
-      const x = e.touches[0].clientX;
-      const diff = startX - x;
-      track.style.transform = `translateX(-${currentTranslate + diff}px)`;
-    }
-  
-    function handleTouchEnd(e) {
-      const endX = e.changedTouches[0].clientX;
-      handleSwipe(startX - endX);
-      startX = 0;
-    }
-  
-    function handleMouseStart(e) {
-      startX = e.clientX;
-      track.style.transition = 'none';
-    }
-  
-    function handleMouseMove(e) {
-      if(!startX) return;
-      const x = e.clientX;
-      const diff = startX - x;
-      track.style.transform = `translateX(-${currentTranslate + diff}px)`;
-    }
-  
-    function handleMouseEnd(e) {
-      const endX = e.clientX;
-      handleSwipe(startX - endX);
-      startX = 0;
-      track.style.transition = 'transform 0.3s ease';
-    }
-  
-    function handleSwipe(diff) {
-      if(Math.abs(diff) < 50) {
-        track.style.transform = `translateX(-${currentTranslate}px)`;
-        return;
-      }
-  
-      if(diff > 0) {
-        currentIndex = Math.min(currentIndex + 1, cards.length - 1);
-      } else {
-        currentIndex = Math.max(currentIndex - 1, 0);
-      }
-  
-      updateSlider();
-      updateDots();
-    }
-  
-    function slideTo(index) {
-      currentIndex = index;
-      updateSlider();
-      updateDots();
-    }
-  
-    function updateSlider() {
-      currentTranslate = currentIndex * cardWidth;
-      track.style.transform = `translateX(-${currentTranslate}px)`;
-    }
-  
-    function updateDots() {
-      document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
-      });
-    }
+  const track = document.querySelector('.carousel-track');
+  const cards = document.querySelectorAll('.feedback-card');
+  const dotsContainer = document.querySelector('.carousel-dots');
+  let startX = 0;
+  let currentTranslate = 0;
+  let currentIndex = 0;
+  let cardWidth = 0;
+
+  function initSlider() {
+    // Получаем полную ширину карточки с margin
+    const cardStyle = getComputedStyle(cards[0]);
+    cardWidth = cards[0].offsetWidth + 
+                parseInt(cardStyle.marginLeft) + 
+                parseInt(cardStyle.marginRight);
+    
+    track.style.width = `${cardWidth * cards.length}px`;
+  }
+
+  // Инициализация при загрузке и ресайзе
+  initSlider();
+  window.addEventListener('resize', initSlider);
+
+  // Создание точек-индикаторов
+  cards.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('carousel-dot');
+    if(index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => slideTo(index));
+    dotsContainer.appendChild(dot);
   });
+
+  // Обработчики событий
+  track.addEventListener('touchstart', handleTouchStart);
+  track.addEventListener('touchmove', handleTouchMove);
+  track.addEventListener('touchend', handleTouchEnd);
+
+  track.addEventListener('mousedown', handleMouseStart);
+  track.addEventListener('mousemove', handleMouseMove);
+  track.addEventListener('mouseup', handleMouseEnd);
+  track.addEventListener('mouseleave', handleMouseEnd);
+
+  function handleTouchStart(e) {
+    startX = e.touches[0].clientX;
+    track.style.transition = 'none';
+  }
+
+  function handleTouchMove(e) {
+    if(!startX) return;
+    const x = e.touches[0].clientX;
+    const diff = startX - x;
+    track.style.transform = `translateX(-${currentTranslate + diff}px)`;
+  }
+
+  function handleTouchEnd(e) {
+    const endX = e.changedTouches[0].clientX;
+    handleSwipe(startX - endX);
+    startX = 0;
+    track.style.transition = 'transform 0.3s ease';
+  }
+
+  function handleMouseStart(e) {
+    startX = e.clientX;
+    track.style.transition = 'none';
+  }
+
+  function handleMouseMove(e) {
+    if(!startX) return;
+    const x = e.clientX;
+    const diff = startX - x;
+    track.style.transform = `translateX(-${currentTranslate + diff}px)`;
+  }
+
+  function handleMouseEnd(e) {
+    const endX = e.clientX;
+    handleSwipe(startX - endX);
+    startX = 0;
+    track.style.transition = 'transform 0.3s ease';
+  }
+
+  function handleSwipe(diff) {
+    if(Math.abs(diff) < 50) {
+      resetPosition();
+      return;
+    }
+
+    if(diff > 0) {
+      // Свайп влево - следующий слайд
+      currentIndex = Math.min(currentIndex + 1, cards.length - 1);
+    } else {
+      // Свайп вправо - предыдущий слайд
+      currentIndex = Math.max(currentIndex - 1, 0);
+    }
+
+    updateSlider();
+    updateDots();
+  }
+
+  function resetPosition() {
+    track.style.transform = `translateX(-${currentTranslate}px)`;
+  }
+
+  function slideTo(index) {
+    currentIndex = index;
+    updateSlider();
+    updateDots();
+  }
+
+  function updateSlider() {
+    // Обновляем ширину карточки при каждом изменении
+    initSlider();
+    currentTranslate = currentIndex * cardWidth;
+    track.style.transform = `translateX(-${currentTranslate}px)`;
+  }
+
+  function updateDots() {
+    document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+});
