@@ -1829,15 +1829,7 @@ html {
   
   .prev-button,
   .next-button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 1.5em;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px 0;
-    transition: background-color 0.3s ease;
+    visibility: hidden;
   }
   
   .prev-button:hover,
