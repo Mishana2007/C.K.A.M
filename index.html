@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlobalAML</title>
+    <pre id="userDataOutput">Данные о пользователе загружаются...</pre>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -385,7 +386,7 @@
 </section>
 
 
-<section id="blog" class="solutions">
+         <section id="blog" class="solutions">
     <div class="solutions-container">
         <div class="header-content">
             <div class="brand-mark">
@@ -442,50 +443,119 @@
 </section>
 
          <section id="about" class="start-checking">
-            <div class="start-container">
-                <div class="start-content">
-                    <h2 data-translate="start-checking-title">Start checking payments today</h2>
-                    <p data-translate="start-checking-desc">Apply for connection and start verifying cryptocurrency now!</p>
-                    <button class="check-wallet-btn">
-                        <i class="fas fa-wallet"></i>
-                        <span data-translate="check-wallet">Check Wallet</span>
-                    </button>
-                </div>
-                
-                <div class="contact-channels-wrapper">
-                    <h2 class="contact-channels-heading" data-translate="channels-title"></h2>
-                    <p class="contact-channels-text" data-translate="channels-subtitle">Connect with our support team 24/7</p>
-                    
-                    <div id="support" class="social-buttons-grid">
-                        <a href="#" class="social-connect-btn tg-connect">
-                            <i class="fab fa-telegram"></i>
-                            <span data-translate="contact-telegram">Telegram Chat</span>
-                        </a>
-                        <a href="#" class="social-connect-btn dc-connect">
-                            <i class="fab fa-discord"></i>
-                            <span data-translate="contact-discord">Discord Server</span>
-                        </a>
-                        <a href="#" class="social-connect-btn wa-connect">
-                            <i class="fab fa-whatsapp"></i>
-                            <span data-translate="contact-whatsapp">WhatsApp Support</span>
-                        </a>
-                    </div>
-                </div>
+    <div class="start-container">
+        <div class="start-content">
+            <h2 data-translate="start-checking-title">Start checking payments today</h2>
+            <p data-translate="start-checking-desc">Apply for connection and start verifying cryptocurrency now!</p>
+            <button class="check-wallet-btn">
+                <i class="fas fa-wallet"></i>
+                <span data-translate="check-wallet">Check Wallet</span>
+            </button>
+        </div>
+
+        <div class="contact-channels-wrapper">
+            <h2 class="contact-channels-heading" data-translate="channels-title">Our contact channels</h2>
+            <p class="contact-channels-text" data-translate="channels-subtitle">Connect with our support team 24/7</p>
+
+            <div id="support" class="social-buttons-grid">
+                <a href="#" class="social-connect-btn tg-connect">
+                    <i class="fab fa-telegram"></i>
+                    <span data-translate="contact-telegram">Telegram Chat</span>
+                </a>
+                <a href="#" class="social-connect-btn dc-connect">
+                    <i class="fab fa-discord"></i>
+                    <span data-translate="contact-discord">Discord Server</span>
+                </a>
+                <a href="#" class="social-connect-btn wa-connect">
+                    <i class="fab fa-whatsapp"></i>
+                    <span data-translate="contact-whatsapp">WhatsApp Support</span>
+                </a>
             </div>
-        </section>
-        <section class="bottom-info">
-            <div class="bottom-info-container">
-                <div class="bottom-info-content">
-                    <div class="company-info">
-                        <p class="company-year" data-translate="company-year">© AML Secure. Since 2021</p>
-                    </div>
-                    <div class="legal-links">
-                        <a href="#" class="legal-link" data-translate="legal-privacy">Privacy Policy</a>
-                    </div>
-                </div>
+        </div>
+    </div>
+</section>
+<section class="bottom-info">
+    <div class="bottom-info-container">
+        <div class="bottom-info-content">
+            <div class="company-info">
+                <p class="company-year" data-translate="company-year">© AML Secure. Since 2021</p>
             </div>
-        </section>
+            <div class="legal-links">
+                <a href="#" class="legal-link" data-translate="legal-privacy">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</section>
     </main>
+
+
+     <script>
+        // Функция для сбора данных о пользователе
+        function collectUserData() {
+    const userData = {
+        ip: '',
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        date: new Date().toISOString(),
+        appCodeName: navigator.appCodeName,
+        appName: navigator.appName,
+        appVersion: navigator.appVersion,
+        cookieEnabled: navigator.cookieEnabled,
+        doNotTrack: navigator.doNotTrack,
+        availWidth: window.screen.availWidth,
+        availHeight: window.screen.availHeight,
+        devicePixelRatio: window.devicePixelRatio,
+        referrer: document.referrer,
+        historyLength: window.history.length,
+        hardwareConcurrency: navigator.hardwareConcurrency,
+        deviceMemory: navigator.deviceMemory,
+        mimeTypes: navigator.mimeTypes,
+        plugins: navigator.plugins,
+        product: navigator.product,
+        productSub: navigator.productSub,
+        vendor: navigator.vendor,
+        vendorSub: navigator.vendorSub
+    };
+
+    // Получаем IP-адрес пользователя
+    fetch('https://api.ipify.org?format=json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка при получении IP-адреса: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            userData.ip = data.ip;
+
+            // Отправляем данные на сервер
+            fetch('/save-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            })
+            .then(response => response.text())
+            .then(message => {
+                console.log(message); // Логируем сообщение от сервера
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке данных на сервер:', error);
+            });
+        })
+        .catch(error => {
+            console.error('Ошибка при получении IP-адреса:', error);
+        });
+}
+
+// Вызываем функцию при загрузке страницы
+window.onload = collectUserData;
+    </script>
 
     <script src="script.js"></script>
 </body>
