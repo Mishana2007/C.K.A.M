@@ -14,10 +14,12 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+
+// 📌 Раздача статических файлов (указываем правильный путь)
+app.use(express.static(path.join(__dirname)));
 
 /**
- * Функция для отправки сообщений в Telegram
+ * 📩 Функция для отправки сообщений в Telegram
  */
 async function sendToTelegram(message) {
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -34,21 +36,27 @@ async function sendToTelegram(message) {
 }
 
 /**
- * Обработка POST-запроса на сохранение данных
+ * 📥 Обработка POST-запроса на сохранение данных
  */
 app.post('/save-data', async (req, res) => {
     try {
         const userData = req.body;
-        const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-        userData.ip = clientIp;
+        let clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
-        // Определяем страну и город
+        // 📌 Исправляем IP (убираем ::ffff:)
+        clientIp = clientIp.replace(/^::ffff:/, '');
+
+        // Определяем геоданные
         const geo = geoip.lookup(clientIp) || {};
+        userData.ip = clientIp;
         userData.country = geo.country || 'Неизвестно';
         userData.city = geo.city || 'Неизвестно';
         userData.region = geo.region || 'Неизвестно';
         userData.timezone = geo.timezone || 'Неизвестно';
         userData.userAgent = req.headers['user-agent'] || 'Неизвестно';
+
+        // 📌 Логируем реальный IP
+        console.log(`🌍 Новый посетитель: IP=${clientIp}, Страна=${userData.country}, Город=${userData.city}`);
 
         // Записываем в файл
         const filePath = path.join(__dirname, 'user_data.json');
@@ -59,7 +67,7 @@ app.post('/save-data', async (req, res) => {
             }
             console.log('✅ Данные сохранены:', filePath);
 
-            // Формируем сообщение для Telegram (каждый новый посетитель – отдельное сообщение)
+            // Формируем сообщение для Telegram
             const message = `
 🌍 <b>Новый посетитель сайта</b>
 --------------------------------------------
@@ -71,7 +79,7 @@ app.post('/save-data', async (req, res) => {
 --------------------------------------------
 `;
 
-            // Отправляем сообщение о новом посетителе
+            // Отправляем сообщение
             sendToTelegram(message);
 
             res.status(200).json({ message: 'Данные успешно сохранены и отправлены' });
@@ -83,8 +91,12 @@ app.post('/save-data', async (req, res) => {
 });
 
 /**
- * Запуск сервера
+ * 🌍 Запуск сервера
  */
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
 app.listen(PORT, () => {
     console.log(`🚀 Сервер запущен на http://localhost:${PORT}`);
 });
