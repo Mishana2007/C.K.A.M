@@ -84,6 +84,26 @@ body {
     font-size: 1rem; /* Сделал ещё чуть меньше */
 }
 
+
+span[data-translate="title"] {
+    font-size: 2rem; /* Увеличенный размер шрифта */
+    font-weight: 700; /* Жирный шрифт */
+    color: #333; /* Тёмный серый цвет */
+    display: block; /* Размещаем на отдельной строке */
+    text-align: center; /* Выравнивание по центру */
+    margin-bottom: 5px; /* Добавляем небольшой отступ */
+}
+
+.highlight {
+    font-size: 1.8rem; /* Чуть меньше основного текста */
+    font-weight: 600; /* Чуть менее жирный */
+    color: #4CAF50; /* Зелёный акцент */
+    text-transform: uppercase; /* Капсом для выделения */
+    letter-spacing: 1px; /* Увеличенный межбуквенный интервал */
+    display: block;
+    text-align: center;
+}
+
 .logo-icon {
     display: flex;
     align-items: center;
@@ -1119,7 +1139,7 @@ html {
 }
 
 .start-checking {
-    margin-bottom: 50px; /* или любое другое значение */
+    margin-bottom: 0; /* или любое другое значение */
 }
 
 
