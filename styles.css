@@ -57,8 +57,26 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
+    gap: 10px;
+    font-size: 18px; /* Уменьшил размер текста */
+    font-weight: 500; /* Сделал текст менее жирным */
+    color: #cccccc; /* Менее яркий оттенок серого */
+}
+
+.logo-img {
+    width: 60px; /* Увеличил размер логотипа */
+    height: auto;
+    border-radius: 10px; /* Лёгкое скругление */
+}
+
+.logo-text {
+    color: #b0b0b0; /* Серый цвет для менее яркого эффекта */
+    font-family: "Oswald", sans-serif;
+}
+
+.logo-highlight {
+    color: #4caf50; /* Мягкий зелёный оттенок */
+    font-weight: 600; /* Немного жирнее, но не слишком */
 }
 
 .logo-icon {
@@ -73,7 +91,7 @@ body {
     font-size: 1.2rem;
 }
 
-.logo-text {
+/* .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-dark);
@@ -81,7 +99,7 @@ body {
 
 .logo-highlight {
     color: var(--primary-color);
-}
+} */
 
 .nav-menu {
     display: flex;
@@ -2362,4 +2380,33 @@ html {
     .testimonial-card {
         flex: 0 0 300px;
     }
+}
+
+
+.email-connect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #28a745, #218838); /* Градиент зелёных оттенков */
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 8px; /* Закругление краёв */
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.email-connect i {
+    font-size: 20px;
+}
+
+.email-connect:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34); /* Затемнённый градиент */
+    transform: scale(1.05); /* Лёгкое увеличение */
+}
+
+.email-connect:active {
+    transform: scale(0.95); /* Кнопка слегка нажимается */
 }
