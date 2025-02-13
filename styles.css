@@ -70,13 +70,18 @@ body {
 }
 
 .logo-text {
-    color: #b0b0b0; /* Серый цвет для менее яркого эффекта */
+    color: #a0a0a0; /* Ещё менее яркий серый */
     font-family: "Oswald", sans-serif;
+    font-size: 1.1rem; /* Уменьшенный размер */
+    font-weight: 400; /* Средний вес, не жирный */
+    letter-spacing: 0.3px; /* Меньше расстояние между буквами */
 }
 
+
 .logo-highlight {
-    color: #4caf50; /* Мягкий зелёный оттенок */
-    font-weight: 600; /* Немного жирнее, но не слишком */
+    color: #388e3c; /* Более приглушённый зелёный */
+    font-weight: 500; /* Чуть жирнее основного текста */
+    font-size: 1rem; /* Сделал ещё чуть меньше */
 }
 
 .logo-icon {
@@ -1654,16 +1659,13 @@ html {
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-medium) 100%);
     border-radius: 10px;
     padding: 2rem;
-    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); */
     display: flex;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    flex-shrink: 0;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: center; /* Центрирование всего контента */
+    text-align: center;
+    width: 300px;
     min-width: 100%;
-    /* flex-shrink: 0; */
-    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
 }
 
@@ -1810,9 +1812,11 @@ html {
   
   .client-logo {
     max-width: 150px;
-    margin: 0 auto 20px;
+    height: auto;
     display: block;
-  }
+    margin: 0 auto; /* Центрирование по горизонтали */
+    object-fit: contain; /* Поддерживает соотношение сторон */
+}
   
   .testimonial-text {
     font-size: 1.2em;
