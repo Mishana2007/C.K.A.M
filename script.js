@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
             support: 'Support',
             wallet: 'Check your wallet',
             testimonialsTitle: 'Preferred by the  best teams',
-        testimonial1: '"Imagine you\'re like a house, you\'re a building. Then GlobalAML would be the reliable foundation for it, offering various \'infrastructure packages\' depending on your needs."',
+        testimonial1: '"Imagine you\'re like a house, you\'re a building. Then CleanCryptoCoins would be the reliable foundation for it, offering various \'infrastructure packages\' depending on your needs."',
         testimonial2: '"Using their infrastructure, our Chain Threat Intelligence System has significantly benefited from free access to real-time data."',
-        testimonial3: '"GlobalAML provides us with a simple unified service that offers access to multiple networks."',
+        testimonial3: '"CleanCryptoCoins provides us with a simple unified service that offers access to multiple networks."',
         author1Name: 'Sever Gansovsky',
         author1Position: 'Customer Success Specialist',
         author2Name: 'Domantas Pelaitis',
@@ -94,6 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
          activeUsers: 'Active Users',
        apiRequests: 'API requests processed monthly',
        companyLaunched: 'Company launched',
+
+       startCheckingTitle: "Start checking payments today",
+        startCheckingDesc: "Apply for connection and start verifying cryptocurrency now!",
+        checkWallet: "Check Wallet",
+        channelsTitle: "Our contact channels",
+        channelsSubtitle: "Connect with our support team 24/7",
+        contactTelegram: "Telegram Chat",
+        contactDiscord: "Discord Server",
+        contactWhatsapp: "WhatsApp Support",
+        contactEmail: "Email Support",
+        companyYear: "© AML Secure. Since 2021",
+        legalPrivacy: "Privacy Policy"
          
 
         },
@@ -117,9 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
             support: 'Поддержка',
             wallet: 'Подключить Кошелек',
             testimonialsTitle: 'Предпочитают лучшие  команды ',
-        testimonial1: '"Представьте, что вы — здание. Тогда GlobalAML станет надёжным фундаментом, предлагая различные «инфраструктурные пакеты» в зависимости от ваших потребностей."',
+        testimonial1: '"Представьте, что вы — здание. Тогда CleanCryptoCoins станет надёжным фундаментом, предлагая различные «инфраструктурные пакеты» в зависимости от ваших потребностей."',
         testimonial2: '"Используя их инфраструктуру, наша система анализа угроз в цепочке значительно выиграла от бесплатного доступа к данным в реальном времени."',
-        testimonial3: '"GlobalAML предоставляет нам простой унифицированный сервис, который даёт доступ к множеству сетей."',
+        testimonial3: '"CleanCryptoCoins предоставляет нам простой унифицированный сервис, который даёт доступ к множеству сетей."',
         author1Name: 'Север Гансовский',
         author1Position: 'Специалист по работе с клиентами',
         author2Name: 'Домантас Пялайтис',
@@ -222,12 +234,79 @@ document.addEventListener('DOMContentLoaded', () => {
         screeningTitle: "Глобальная проверка",
         screeningDesc: "Проверка санкций и PEP-лиц в реальном времени",
 
+
+        riskDesc: "Обнаружение и предотвращение угроз на ИИ",
+    screeningTitle: "Глобальная проверка",
+    screeningDesc: "Проверка санкций и PEP-лиц в реальном времени",
+
+
+    monitorTitle: "Мониторинг в реальном времени",
+        monitorDesc: "Продвинутая аналитика блокчейна с мгновенными оповещениями",
+        reportsTitle: "Умная отчетность",
+        reportsDesc: "Автоматизированная документация соответствия",
+        verifyTitle: "Проверка личности",
+        verifyDesc: "Безопасная верификация за минуты",
+        riskTitle: "Прогнозирующий риск-менеджер",
+        riskDesc: "Обнаружение и предотвращение угроз на ИИ",
+        screeningTitle: "Глобальная проверка",
+        screeningDesc: "Проверка санкций и PEP-лиц в реальном времени",
+
+        startCheckingTitle: "Начните проверять платежи уже сегодня",
+        startCheckingDesc: "Подайте заявку на подключение и начните проверять криптовалюту прямо сейчас!",
+        checkWallet: "Проверить кошелек",
+        channelsTitle: "Наши контактные каналы",
+        channelsSubtitle: "Свяжитесь с нашей поддержкой 24/7",
+        contactTelegram: "Чат в Telegram",
+        contactDiscord: "Сервер в Discord",
+        contactEmail: "Поддержка по Email",
+        contactWhatsapp: "Поддержка в WhatsApp",
+        companyYear: "© AML Secure. С 2021 года",
+        legalPrivacy: "Политика конфиденциальности"
+
         
 
         
         
         }
     };
+
+    function changeLanguage(lang) {
+        if (!translations[lang]) return;
+    
+        document.querySelectorAll("[data-translate]").forEach((element) => {
+            const key = element.getAttribute("data-translate");
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+    
+        // Сохраняем выбор языка в localStorage
+        localStorage.setItem("selectedLanguage", lang);
+    }
+    
+    // Получаем сохранённый язык при загрузке страницы
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedLang = localStorage.getItem("selectedLanguage") || "en"; // По умолчанию - английский
+        changeLanguage(savedLang); // Перевести при загрузке
+    
+        // Добавляем обработчики кликов на кнопки смены языка
+        document.querySelectorAll(".language-option").forEach((option) => {
+            option.addEventListener("click", () => {
+                const selectedLang = option.getAttribute("data-lang");
+                changeLanguage(selectedLang);
+    
+                // 🛠️ Переводим блок `solutions` принудительно после смены языка
+                setTimeout(() => {
+                    document.querySelectorAll("[data-translate]").forEach((element) => {
+                        const key = element.getAttribute("data-translate");
+                        if (translations[selectedLang] && translations[selectedLang][key]) {
+                            element.textContent = translations[selectedLang][key];
+                        }
+                    });
+                }, 50); // Короткая задержка на прогрузку
+            });
+        });
+    });
 
     // Функция установки языка
     function setLanguage(lang) {
@@ -461,3 +540,6 @@ dots.forEach((dot, index) => {
     updateCarousel();
   });
 });
+
+
+
