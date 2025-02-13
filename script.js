@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Объект с переводами
     const translations = {
         en: {
-            title: 'The Best AML Service',
+            title: 'The Best CleanCryptoCoins Service',
             titleHighlight: 'for Your Business',
-            subtitle: 'AML / KYC Automation for Compliance with Regulations',
+            subtitle: 'CleanCryptoCoins / KYC Automation for Compliance with Regulations',
             announcement: '🔥 New: Enhanced Blockchain Analysis Features Available!',
             // Feature badges
             business: 'For Business',
@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         kycFeature1Text: "Reliable verification strengthens user trust.",
         kycFeature2Title: "24/7 customer support",
         kycFeature2Text: "Our specialists are always ready to assist your users.",
-        amlTitle: "AML Check",
-        amlDescription: "Minimize risks with our automated AML check, tracking the sources and routes of cryptocurrencies to prevent fraud.",
+        amlTitle: "CleanCryptoCoins Check",
+        amlDescription: "Minimize risks with our automated CleanCryptoCoins check, tracking the sources and routes of cryptocurrencies to prevent fraud.",
         amlFeature1Title: "Transaction source verification",
         amlFeature1Text: "Confirm the legitimacy of the fund senders.",
         amlFeature2Title: "Verification of end recipients",
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         priceSuffix: '$ per month',
         pricingTitle: "Service Prices",
         pricingSubtitle: "A wide range for any business",
-        annualTitle: "AML 1 Year",
+        annualTitle: "CleanCryptoCoins 1 Year",
         annualDescription: "A long-term solution for large organizations, including bulk checks.",
         annualPeriod: "for 12 months",
         featureUnlimited: "Unlimited checks",
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trialDescription: "Check transactions individually as needed. Suitable for individuals.",
         trialPeriod: "1 free check",
         startTrial: "Start Free Trial",
-        perTransactionTitle: "AML Per Transaction",
+        perTransactionTitle: "CleanCryptoCoins Per Transaction",
         perTransactionDescription: "Pay only for the transactions you check. Ideal for small businesses.",
         perTransactionPeriod: "per transaction",
         getStarted: "Get Started",
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         analysisSubtitle: "Analyze and improve processes to enhance the security and efficiency of your business.",
         kycVerification: "KYC Verification",
         kycVerificationDesc: "Verify the identity of clients to comply with regulations and minimize risks.",
-        amlCompliance: "AML Compliance",
+        amlCompliance: "CleanCryptoCoins Compliance",
         amlComplianceDesc: "Automate anti-money laundering efforts through transaction monitoring.",
         cryptoAnalysis: "Crypto Transaction Analysis",
         cryptoAnalysisDesc: "Obtain reports on cryptocurrency transfers to prevent crimes.",
@@ -104,16 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
         contactDiscord: "Discord Server",
         contactWhatsapp: "WhatsApp Support",
         contactEmail: "Email Support",
-        companyYear: "© AML Secure. Since 2021",
+        companyYear: "© CleanCryptoCoins Secure. Since 2021",
         legalPrivacy: "Privacy Policy"
          
 
         },
         ru: {
 
-            title: 'Лучший AML Сервис',
+            title: 'Лучший CleanCryptoCoins Сервис',
             titleHighlight: 'для Вашего Бизнеса',
-            subtitle: 'Автоматизация AML / KYC для соответствия нормам',
+            subtitle: 'Автоматизация CleanCryptoCoins / KYC для соответствия нормам',
             announcement: '🔥 Новинка: Доступны улучшенные функции анализа блокчейна!',
             // Feature badges
             business: 'Для Бизнеса',
@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
         kycFeature1Text: "Надёжная проверка укрепляет доверие пользователей.",
         kycFeature2Title: "Круглосуточная поддержка",
         kycFeature2Text: "Наши специалисты всегда готовы помочь вашим пользователям.",
-        amlTitle: "AML Проверка",
-        amlDescription: "Снижайте риски с помощью автоматической AML проверки, отслеживающей источники и маршруты криптовалют для предотвращения мошенничества.",
+        amlTitle: "CleanCryptoCoins Проверка",
+        amlDescription: "Снижайте риски с помощью автоматической CleanCryptoCoins проверки, отслеживающей источники и маршруты криптовалют для предотвращения мошенничества.",
         amlFeature1Title: "Проверка источника транзакций",
         amlFeature1Text: "Подтверждаем легитимность отправителей средств.",
         amlFeature2Title: "Верификация конечных получателей",
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         priceSuffix: '$ в месяц',
         pricingTitle: "Стоимость услуг",
         pricingSubtitle: "Широкий выбор для любого бизнеса",
-        annualTitle: "AML на 1 год",
+        annualTitle: "CleanCryptoCoins на 1 год",
         annualDescription: "Долгосрочное решение для крупных организаций с пакетной проверкой",
         annualPeriod: "на 12 месяцев",
         featureUnlimited: "Неограниченные проверки",
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         trialDescription: "Проверяйте транзакции по мере необходимости. Подходит для частных лиц.",
         trialPeriod: "1 бесплатная проверка",
         startTrial: "Начать пробный период",
-        perTransactionTitle: "AML за транзакцию",
+        perTransactionTitle: "CleanCryptoCoins за транзакцию",
         perTransactionDescription: "Платите только за проверенные транзакции. Идеально для малого бизнеса.",
         perTransactionPeriod: "за транзакцию",
         getStarted: "Начать",
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         analysisSubtitle: "Анализируйте и улучшайте процессы для повышения безопасности и эффективности вашего бизнеса.",
         kycVerification: "KYC Верификация",
         kycVerificationDesc: "Проверка личности клиентов для соблюдения нормативных требований и снижения рисков.",
-        amlCompliance: "AML Соответствие",
+        amlCompliance: "CleanCryptoCoins Соответствие",
         amlComplianceDesc: "Автоматизация противодействия отмыванию денег через мониторинг транзакций.",
         cryptoAnalysis: "Анализ криптотранзакций",
         cryptoAnalysisDesc: "Получайте отчеты о переводах криптовалют для предотвращения преступлений.",
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Карточки первого ряда
         kycVerification: "KYC Верификация",
         kycVerificationDesc: "Проверка личности клиентов для соблюдения нормативных требований и минимизации рисков.",
-        amlCompliance: "AML Соответствие",
+        amlCompliance: "CleanCryptoCoins Соответствие",
         amlComplianceDesc: "Автоматизация противодействия отмыванию денег через мониторинг транзакций.",
         cryptoAnalysis: "Анализ криптотранзакций",
         cryptoAnalysisDesc: "Получение отчетов о переводах криптовалют для предотвращения преступлений.",
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rapidIntegration: "Быстрая интеграция",
         rapidIntegrationDesc: "Внедрение решений с минимальными задержками и максимальной эффективностью.",
 
-        companyTitle: "AML Secure", // название бренда оставляем
+        companyTitle: " CleanCrypto Secure", // название бренда оставляем
         teamDesc: "Обеспечиваем безопасное будущее криптотранзакций",
         
         // Карточки решений
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contactDiscord: "Сервер в Discord",
         contactEmail: "Поддержка по Email",
         contactWhatsapp: "Поддержка в WhatsApp",
-        companyYear: "© AML Secure. С 2021 года",
+        companyYear: "© CleanCryptoCoins Secure. С 2021 года",
         legalPrivacy: "Политика конфиденциальности"
 
         
