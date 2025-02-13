@@ -340,96 +340,140 @@ body {
 }
 
 .products {
-    padding: 6rem 2rem;
+    padding: 5rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Заголовок секции */
 .products-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    color: #2e7d32; /* Темно-зелёный */
 }
 
+/* Подзаголовок */
 .products-subtitle {
     text-align: center;
-    color: var(--text-light);
+    color: #555;
     font-size: 1.25rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
+/* Грид сетка */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Сделал минимальную ширину больше */
     gap: 2rem;
     padding: 1rem;
 }
 
+/* Карточка продукта */
 .product-card {
-    background: var(--white);
+    background: linear-gradient(135deg, #e6f7eb 0%, #d4f3e0 100%); /* Светло-зелёный градиент */
     border-radius: 16px;
     padding: 2rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* Иконка карточки */
 .product-icon {
     width: 64px;
     height: 64px;
-    background: var(--primary-light);
+    background: #c8e6c9; /* Светло-зелёный */
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin: 0 auto 1.5rem;
 }
 
 .product-icon i {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: #2e7d32; /* Темно-зелёный */
 }
 
+/* Заголовок карточки */
 .product-card h3 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
+    color: #2e7d32; /* Цвет в тон */
 }
 
+/* Текст карточки */
 .product-card > p {
-    color: var(--text-light);
-    margin-bottom: 2rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
+/* Фичи карточки */
 .product-features {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
+/* Блок каждой фичи */
 .feature {
     display: flex;
     gap: 1rem;
     align-items: flex-start;
 }
 
+/* Иконки в фичах */
 .feature i {
-    color: var(--primary-color);
-    font-size: 1.25rem;
+    color: #2e7d32;
+    font-size: 1.5rem;
 }
 
+/* Заголовок фичи */
 .feature h4 {
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
+    color: #2e7d32;
 }
 
+/* Текст фичи */
 .feature p {
-    color: var(--text-light);
+    color: #666;
     font-size: 0.9rem;
+}
+
+
+
+
+
+/* Стили для заголовка */
+h1[data-translate="companyTitle"] {
+    font-size: 1.2rem; /* Минимальный размер */
+    font-weight: 500; /* Ещё тоньше */
+    text-align: center; /* Центрирование */
+    color: #2e7d32; /* Немного темнее, чтобы читалось */
+    margin-bottom: 0.5rem; /* Минимальный отступ */
+}
+
+/* Ещё меньше на мобильных */
+@media (max-width: 768px) {
+    h1[data-translate="companyTitle"] {
+        font-size: 0.50rem; /* На планшетах */
+    }
+}
+
+@media (max-width: 480px) {
+    h1[data-translate="companyTitle"] {
+        font-size: 0.20rem; /* Минимальный размер для мобильных */
+    }
 }
 
 
