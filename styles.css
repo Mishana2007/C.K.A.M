@@ -1,2480 +1,545 @@
-:root {
-    --primary-color: #28A745;
-    --primary-hover: #218838;
-    --primary-light: rgba(40, 167, 69, 0.1);
-    --bg-light: #F0FFF4;
-    --text-dark: #333333;
-    --text-light: #555555;
-    --white: #FFFFFF;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    line-height: 1.6;
-    overflow-x: hidden;
-    padding-top: 80px;
-}
-
-.header.scroll-down {
-    box-shadow: var(--shadow-md);
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    padding: 1rem 0;
-    background: rgba(240, 255, 244, 0.8); /* Matches your bg-light with transparency */
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(40, 167, 69, 0.1);
-}
-
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px; /* Уменьшил размер текста */
-    font-weight: 500; /* Сделал текст менее жирным */
-    color: #cccccc; /* Менее яркий оттенок серого */
-}
-
-.logo-img {
-    width: 60px; /* Увеличил размер логотипа */
-    height: auto;
-    border-radius: 10px; /* Лёгкое скругление */
-}
-
-.logo-text {
-    color: #a0a0a0; /* Ещё менее яркий серый */
-    font-family: "Oswald", sans-serif;
-    font-size: 1.1rem; /* Уменьшенный размер */
-    font-weight: 400; /* Средний вес, не жирный */
-    letter-spacing: 0.3px; /* Меньше расстояние между буквами */
-}
-
-
-.logo-highlight {
-    color: #388e3c; /* Более приглушённый зелёный */
-    font-weight: 500; /* Чуть жирнее основного текста */
-    font-size: 1rem; /* Сделал ещё чуть меньше */
-}
-
-
-span[data-translate="title"] {
-    font-size: 2rem; /* Увеличенный размер шрифта */
-    font-weight: 700; /* Жирный шрифт */
-    color: #333; /* Тёмный серый цвет */
-    display: block; /* Размещаем на отдельной строке */
-    text-align: center; /* Выравнивание по центру */
-    margin-bottom: 5px; /* Добавляем небольшой отступ */
-}
-
-.highlight {
-    font-size: 1.8rem; /* Чуть меньше основного текста */
-    font-weight: 600; /* Чуть менее жирный */
-    color: #4CAF50; /* Зелёный акцент */
-    text-transform: uppercase; /* Капсом для выделения */
-    letter-spacing: 1px; /* Увеличенный межбуквенный интервал */
-    display: block;
-    text-align: center;
-}
-
-.logo-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--primary-color);
-    color: var(--white);
-    border-radius: 8px;
-    font-size: 1.2rem;
-}
-
-/* .logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-dark);
-}
-
-.logo-highlight {
-    color: var(--primary-color);
-} */
-
-.nav-menu {
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-link {
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.nav-link:hover {
-    color: var(--primary-color);
-}
-
-.language-selector {
-    position: relative;
-    z-index: 1000;
-}
-
-.language-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: rgb(1, 1, 1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.language-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.language-btn[aria-expanded="true"] .fa-chevron-down {
-    transform: rotate(180deg);
-}
-
-.language-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 160px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: none;
-    padding: 8px 0;
-}
-
-.language-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    color: #333;
-}
-
-.language-option:hover,
-.language-option:focus {
-    background-color: #f5f5f5;
-    outline: none;
-}
-
-.language-option:focus-visible {
-    outline: 2px solid #007bff;
-    outline-offset: -2px;
-}
-
-.lang-flag {
-    font-size: 1.2em;
-}
-
-.fa-chevron-down {
-    transition: transform 0.3s ease;
-    font-size: 0.8em;
-}
-
-.lang-name {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-
-.hero {
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 4rem 2rem;
-    position: relative;
-}
-
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-}
-
-.hero-title .highlight {
-    color: var(--primary-color);
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    margin-bottom: 2.5rem;
-}
-
-.wallet-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    margin: 0 auto;
-    min-width: 200px;
-}
-
-.wallet-btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-.features-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 4rem;
-    max-width: 1200px;
-}
-
-.feature-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.5rem;
-    background: var(--white);
-    color: var(--primary-color);
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.feature-badge:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-}
-
-.partners {
-    padding: 4rem 2rem;
-    margin-top: 4rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.partners-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    text-align: center;
-}
-
-.partners-slider {
-    overflow: hidden;
-    position: relative;
-    padding: 2rem 0;
-}
-
-.partners-track {
-    display: flex;
-    gap: 4rem;
-    animation: scrollPartners 25s linear infinite;
-    width: fit-content;
-}
-
-.partner-logo {
-    text-align: center;
-}
-
-.partner-logo h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-}
-
-.partner-logo-image {
-    width: 240px;
-    height: 160px;
-    padding: 1rem;
-    transition: var(--transition);
-}
-
-.partner-logo:hover .partner-logo-image {
-    transform: scale(1.05);
-}
-
-@keyframes scrollPartners {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-100% / 2)); }
-}
-
-.products {
-    padding: 5rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Заголовок секции */
-.products-title {
-    font-size: 3rem;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #2e7d32; /* Темно-зелёный */
-}
-
-/* Подзаголовок */
-.products-subtitle {
-    text-align: center;
-    color: #555;
-    font-size: 1.25rem;
-    margin-bottom: 3rem;
-}
-
-/* Грид сетка */
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Сделал минимальную ширину больше */
-    gap: 2rem;
-    padding: 1rem;
-}
-
-/* Карточка продукта */
-.product-card {
-    background: linear-gradient(135deg, #e6f7eb 0%, #d4f3e0 100%); /* Светло-зелёный градиент */
-    border-radius: 16px;
-    padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Иконка карточки */
-.product-icon {
-    width: 64px;
-    height: 64px;
-    background: #c8e6c9; /* Светло-зелёный */
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-}
-
-.product-icon i {
-    font-size: 2rem;
-    color: #2e7d32; /* Темно-зелёный */
-}
-
-/* Заголовок карточки */
-.product-card h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    color: #2e7d32; /* Цвет в тон */
-}
-
-/* Текст карточки */
-.product-card > p {
-    color: #444;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.4;
-}
-
-/* Фичи карточки */
-.product-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-/* Блок каждой фичи */
-.feature {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-}
-
-/* Иконки в фичах */
-.feature i {
-    color: #2e7d32;
-    font-size: 1.5rem;
-}
-
-/* Заголовок фичи */
-.feature h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-    color: #2e7d32;
-}
-
-/* Текст фичи */
-.feature p {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-
-
-
-
-/* Стили для заголовка */
-h1[data-translate="companyTitle"] {
-    font-size: 1.2rem; /* Минимальный размер */
-    font-weight: 500; /* Ещё тоньше */
-    text-align: center; /* Центрирование */
-    color: #2e7d32; /* Немного темнее, чтобы читалось */
-    margin-bottom: 0.5rem; /* Минимальный отступ */
-}
-
-/* Ещё меньше на мобильных */
-@media (max-width: 768px) {
-    h1[data-translate="companyTitle"] {
-        font-size: 0.50rem; /* На планшетах */
-    }
-}
-
-@media (max-width: 480px) {
-    h1[data-translate="companyTitle"] {
-        font-size: 0.20rem; /* Минимальный размер для мобильных */
-    }
-}
-
-
-.pricing {
-    padding: 6rem 2rem;
-    background: var(--bg-light);
-}
-
-.pricing-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.pricing-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    font-size: 1.25rem;
-    margin-bottom: 4rem;
-}
-
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.price-card {
-    background: var(--white);
-    border-radius: 24px;
-    padding: 2.5rem;
-    position: relative;
-    transition: var(--transition);
-    border: 2px solid transparent;
-}
-
-.price-card.featured {
-    border-color: var(--primary-color);
-    background: var(--primary-light);
-}
-
-.featured-badge {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary-color);
-    color: var(--white);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.price-card h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-}
-
-.price-description {
-    color: var(--text-light);
-    margin-bottom: 2rem;
-    min-height: 48px;
-}
-
-.price {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.amount {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--primary-color);
-}
-
-.period {
-    display: block;
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.features-list {
-    list-style: none;
-    margin: 2rem 0;
-}
-
-.features-list li {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.features-list i {
-    color: var(--primary-color);
-    margin-top: 0.25rem;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* .header-wallet-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-} */
-
-/* .header-wallet-btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-} */
-
-.header-wallet-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.header-wallet-btn i {
-    font-size: 18px; /* Размер шрифта иконки */
-}
-
-.header-wallet-btn span {
-    display: inline-block; /* Текст отображается как блочный элемент */
-}
-
-
-.header-wallet-btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-
-
-html {
-    scroll-behavior: smooth;
-}
-
-/* Медиа-запросы для мобильных устройств */
-@media (max-width: 768px) {
-    .header-wallet-btn {
-        padding: 0.3rem 0.8rem; /* Уменьшаем отступы */
-        font-size: 0.8rem; /* Уменьшаем размер шрифта */
-        gap: 0.3rem; /* Уменьшаем расстояние между иконкой и текстом */
-    }
-
-    .header-wallet-btn i {
-        font-size: 16px; /* Уменьшаем размер иконки на мобильных устройствах */
-    }
-    .header-wallet-btn span {
-        display: none; /* Скрываем текст на мобильных устройствах */
-    }
-}
-
-
-.select-plan-btn {
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 12px;
-    background: var(--primary-color);
-    color: var(--white);
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.select-plan-btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-
-.analysis {
-    padding: 6rem 2rem;
-    background: var(--white);
-}
-
-.analysis-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.analysis-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
-
-.analysis-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    font-size: 1.25rem;
-    margin-bottom: 4rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.analysis-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.analysis-row {
-    display: grid;
-    gap: 2rem;
-}
-
-.analysis-row:first-child {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.analysis-row:last-child {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.analysis-card {
-    background: var(--bg-light);
-    border-radius: 24px;
-    padding: 2.5rem;
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.analysis-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.card-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--primary-color);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-icon i {
-    font-size: 1.5rem;
-    color: var(--white);
-}
-
-.analysis-card h3 {
-    font-size: 1.5rem;
-    color: var(--text-dark);
-    font-weight: 700;
-}
-
-.analysis-card p {
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-@media (max-width: 968px) {
-    .analysis-row:first-child {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .analysis-row:last-child {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 640px) {
-    .analysis-row:first-child {
-        grid-template-columns: 1fr;
-    }
-    
-    .analysis-title {
-        font-size: 2.5rem;
-    }
-}
-
-.features-dark {
-    background: #111827;
-    padding: 6rem 2rem;
-    color: white;
-}
-
-.features-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.features-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.logo-large {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.logo-large i {
-    font-size: 3rem;
-    color: var(--primary-color);
-}
-
-.logo-large span {
-    font-size: 2.5rem;
-    font-weight: 700;
-}
-
-.features-header h2 {
-    font-size: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #9CA3AF;
-}
-
-.features-grid-dark {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.features-grid-dark > :nth-last-child(-n+2) {
-    grid-column: span 3/2;
-}
-
-.feature-card {
-    background: #1F2937;
-    border-radius: 16px;
-    padding: 2rem;
-    transition: var(--transition);
-}
-
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.feature-card.highlight {
-    background: rgba(40, 167, 69, 0.1);
-    border: 1px solid var(--primary-color);
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.feature-card p {
-    color: #9CA3AF;
-    line-height: 1.6;
-}
-
-@media (max-width: 968px) {
-    .features-grid-dark {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .features-grid-dark > :nth-last-child(-n+2) {
-        grid-column: auto;
-    }
-}
-
-@media (max-width: 640px) {
-    .features-grid-dark {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
-
-.dark-features {
-    background: linear-gradient(180deg, #0A0F1C 0%, #1A1F2E 100%);
-    padding: 80px 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo-section {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.logo-section h1 {
-    color: #fff;
-    font-size: 32px;
-    margin-top: 15px;
-}
-
-.team-info {
-    color: #9BA3AF;
-    text-align: center;
-    font-size: 28px;
-    max-width: 700px;
-    margin: 0 auto 60px;
-}
-
-.features-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.top-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.bottom-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-}
-
-.feature-box {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
-    transition: transform 0.3s ease;
-}
-
-.feature-box:hover {
-    transform: translateY(-5px);
-}
-
-.feature-box.accent {
-    background: rgba(40, 167, 69, 0.1);
-    border: 1px solid var(--primary-color);
-}
-
-.feature-box h3 {
-    color: #fff;
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-.feature-box p {
-    color: #9BA3AF;
-    line-height: 1.6;
-}
-
-@media (max-width: 900px) {
-    .top-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .bottom-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 600px) {
-    .top-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
-
-
-.solutions {
-    background: linear-gradient(135deg, #1a1f35 0%, #0f172a 100%);
-    padding: 5rem 0;
-}
-
-.solutions-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.header-content {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.brand-mark {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
- margin-bottom: 1.5rem;
-}
-
-.icon-wrapper {
-    background: var(--primary-color);
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--white);
-    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
-}
-
-.brand-mark h1 {
-    color: var(--text-dark);
-    font-size: 2.5rem;
-    font-weight: 700;
-}
-
-.team-desc {
-    color: var(--text-light);
-    font-size: 1.25rem;
-}
-
-.solutions-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.solution-card {
-    background: var(--white);
-    border: 1px solid rgba(40, 167, 69, 0.1);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    display: flex;
-    gap: 1.5rem;
-    box-shadow: var(--shadow-sm);
-}
-
-.solution-card:hover {
-    background: var(--primary-light);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-}
-
-.solution-card.elevated {
-    background: var(--primary-light);
-    border: 1px solid var(--primary-color);
-}
-
-.solution-card.wide {
-    grid-column: span 3/2;
-}
-
-.solution-card.glow {
-    position: relative;
-    overflow: hidden;
-}
-
-.solution-card.glow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        to right,
-        transparent,
-        rgba(255, 255, 255, 0.05),
-        transparent
-    );
-    animation: shine 3s infinite;
-}
-
-.solution-card i {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-}
-
-.card-content h3 {
-    color: var(--text-dark);
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-
-
-
-.card-content p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-@keyframes shine {
-    100% {
-        left: 200%;
-    }
-}
-
-@media (max-width: 768px) {
-    .solutions-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .solution-card.wide {
-        grid-column: auto;
-    }
-}
-
-.start-checking,
-.contact-channels {
-    padding: 50px 0; /* или любое другое значение */
-}
-
-.solutions, .start-checking {
-    background: var(--bg-light);
-    padding: 6rem 0;
-}
-
-.start-checking {
-    margin-bottom: 0; /* или любое другое значение */
-}
-
-
-.solutions-container, .start-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-
-.start-container {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-}
-
-
-
-.start-content {
-    flex: 1;
-}
-
-.start-content h2 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-}
-
-.start-content p {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    margin-bottom: 2.5rem;
-}
-
-#support {
-    margin-top: 10px; /* Уменьшите значение по вашему вкусу */
-}
-
-.check-wallet-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.check-wallet-btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-2px);
-}
-
-.transactions-preview {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.transaction-card {
-    background: var(--white);
-    border: 1px solid rgba(40, 167, 69, 0.1);
-    border-radius: 16px;
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-sm);
-}
-
-.transaction-card:hover {
-    transform: translateX(10px);
-    background: var(--primary-light);
-    box-shadow: var(--shadow-md);
-}
-
-.crypto-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    background: var(--primary-color);
-    color: var(--white);
-}
-
-.crypto-icon.eth {
-    background: #627EEA;
-}
-
-.crypto-icon.btc {
-    background: #F7931A;
-}
-
-.transaction-info h3 {
-    color: var(--text-dark);
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-.transaction-info p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-@media (min-width: 800px) {
-    .partners {
-        padding:0;
-        max-width: 780px;
-    }
-
-    .partners-slider {
-        overflow: hidden;
-        position: relative;
-        padding:0;
+document.addEventListener('DOMContentLoaded', () => {
+    // Объект с переводами
+    const translations = {
+        en: {
+            title: 'The Best CleanCryptoCoins Service',
+            titleHighlight: 'for Your Business',
+            subtitle: 'CleanCryptoCoins / KYC Automation for Compliance with Regulations',
+            announcement: '🔥 New: Enhanced Blockchain Analysis Features Available!',
+            // Feature badges
+            business: 'For Business',
+            personal: 'For Personal Use',
+            automation: 'Automation',
+            reporting: 'Reporting',
+            savings: 'Cost Savings',
+            products: 'Products',
+            pricing: 'Pricing',
+            analysis: 'Analysis',
+            blog: 'Blog',
+            about: 'About Us',
+            support: 'Support',
+            wallet: 'Check your wallet',
+            testimonialsTitle: 'Preferred by the  best teams',
+        testimonial1: '"Imagine you\'re like a house, you\'re a building. Then CleanCryptoCoins would be the reliable foundation for it, offering various \'infrastructure packages\' depending on your needs."',
+        testimonial2: '"Using their infrastructure, our Chain Threat Intelligence System has significantly benefited from free access to real-time data."',
+        testimonial3: '"CleanCryptoCoins provides us with a simple unified service that offers access to multiple networks."',
+        author1Name: 'Sever Gansovsky',
+        author1Position: 'Customer Success Specialist',
+        author2Name: 'Domantas Pelaitis',
+        author2Position: 'Chief Technology Officer',
+        author3Name: 'Andrey Lazutkin',
+        author3Position: 'Developer',
+        products: "Products",
+        productsSubtitle: "Trusted by major players in the crypto market!",
+        kycTitle: "KYC Check",
+        kycDescription: "Conduct secure and fast client verification using our automated KYC system, compliant with international standards.",
+        kycFeature1Title: "Increase trust in your business",
+        kycFeature1Text: "Reliable verification strengthens user trust.",
+        kycFeature2Title: "24/7 customer support",
+        kycFeature2Text: "Our specialists are always ready to assist your users.",
+        amlTitle: "CleanCryptoCoins Check",
+        amlDescription: "Minimize risks with our automated CleanCryptoCoins check, tracking the sources and routes of cryptocurrencies to prevent fraud.",
+        amlFeature1Title: "Transaction source verification",
+        amlFeature1Text: "Confirm the legitimacy of the fund senders.",
+        amlFeature2Title: "Verification of end recipients",
+        amlFeature2Text: "Verify fund recipients to mitigate risks.",
+        nodeTitle: 'Dedicated Node',
+        nodeSubtitle: 'Private server with custom settings',
+        requestsLabel: 'Requests',
+        requestsValue: 'Unlimited',
+        rateLabel: 'Rate Limit',
+        rateValue: 'Unlimited',
+        dataLabel: 'Data',
+        dataValue: 'Archive',
+        pricePrefix: 'Starting at',
+        priceSuffix: '$ per month',
+        pricingTitle: "Service Prices",
+        pricingSubtitle: "A wide range for any business",
+        annualTitle: "CleanCryptoCoins 1 Year",
+        annualDescription: "A long-term solution for large organizations, including bulk checks.",
+        annualPeriod: "for 12 months",
+        featureUnlimited: "Unlimited checks",
+        featureUnlimitedDesc: "Check as many transactions as you need",
+        selectPlan: "Connect a subscription",
+        mostPopular: "Most Popular",
+        trialTitle: "1 month subscription",
+        trialDescription: "Check transactions individually as needed. Suitable for individuals.",
+        trialPeriod: "1 free check",
+        startTrial: "Start Free Trial",
+        perTransactionTitle: "CleanCryptoCoins Per Transaction",
+        perTransactionDescription: "Pay only for the transactions you check. Ideal for small businesses.",
+        perTransactionPeriod: "per transaction",
+        getStarted: "Get Started",
+
+        activeUsers: "Active Users",
+        apiRequests: "API requests processed monthly",
+        companyLaunched: "Company launched",
         
-    }
+        // Analysis
+        analysisTitle: "Analysis",
+        analysisSubtitle: "Analyze and improve processes to enhance the security and efficiency of your business.",
+        kycVerification: "KYC Verification",
+        kycVerificationDesc: "Verify the identity of clients to comply with regulations and minimize risks.",
+        amlCompliance: "CleanCryptoCoins Compliance",
+        amlComplianceDesc: "Automate anti-money laundering efforts through transaction monitoring.",
+        cryptoAnalysis: "Crypto Transaction Analysis",
+        cryptoAnalysisDesc: "Obtain reports on cryptocurrency transfers to prevent crimes.",
+        riskReduction: "Risk Reduction",
+        riskReductionDesc: "Assess the risks of working with new partners using our tools.",
+        rapidIntegration: "Rapid Integration",
+        rapidIntegrationDesc: "Implement solutions with minimal delays and maximum efficiency.",
+        activeUsers: 'Active Users',
+        apiRequests: 'API requests processed monthly',
+         companyLaunched: 'Company launched',
+         activeUsers: 'Active Users',
+       apiRequests: 'API requests processed monthly',
+       companyLaunched: 'Company launched',
 
-    .pricing-grid {
-        display: flex;
-        flex-direction: column;
-    }
+       startCheckingTitle: "Start checking payments today",
+        startCheckingDesc: "Apply for connection and start verifying cryptocurrency now!",
+        checkWallet: "Check Wallet",
+        channelsTitle: "Our contact channels",
+        channelsSubtitle: "Connect with our support team 24/7",
+        contactTelegram: "Telegram Chat",
+        contactDiscord: "Discord Server",
+        contactWhatsapp: "WhatsApp Support",
+        contactEmail: "Email Support",
+        companyYear: "© CleanCryptoCoins Secure. Since 2021",
+        legalPrivacy: "Privacy Policy"
+         
 
-    .solutions-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .solution-card.wide {
-        grid-column: auto;
-    }
-    
-    .start-container {
-        flex-direction: column;
-    }
-    
-    .start-content {
-        text-align: center;
-    }
-    
-    .start-content h2 {
-        font-size: 2.5rem;
-    }
-}
+        },
+        ru: {
 
-@media (min-width: 900px) {
-
-    .partners {
-        padding:0;
-        max-width: 820px;
-    }
-
-    .partners-slider {
-        overflow: hidden;
-        position: relative;
-        padding:0;
+            title: 'Лучший CleanCryptoCoins Сервис',
+            titleHighlight: 'для Вашего Бизнеса',
+            subtitle: 'Автоматизация CleanCryptoCoins / KYC для соответствия нормам',
+            announcement: '🔥 Новинка: Доступны улучшенные функции анализа блокчейна!',
+            // Feature badges
+            business: 'Для Бизнеса',
+            personal: 'Для Частных Лиц',
+            automation: 'Автоматизация',
+            reporting: 'Отчетность',
+            savings: 'Экономия',
+            products: 'Продукты',
+            pricing: 'Цены',
+            analysis: 'Анализ',
+            blog: 'Блог',
+            about: 'О Нас',
+            support: 'Поддержка',
+            wallet: 'Подключить Кошелек',
+            testimonialsTitle: 'Предпочитают лучшие  команды ',
+        testimonial1: '"Представьте, что вы — здание. Тогда CleanCryptoCoins станет надёжным фундаментом, предлагая различные «инфраструктурные пакеты» в зависимости от ваших потребностей."',
+        testimonial2: '"Используя их инфраструктуру, наша система анализа угроз в цепочке значительно выиграла от бесплатного доступа к данным в реальном времени."',
+        testimonial3: '"CleanCryptoCoins предоставляет нам простой унифицированный сервис, который даёт доступ к множеству сетей."',
+        author1Name: 'Север Гансовский',
+        author1Position: 'Специалист по работе с клиентами',
+        author2Name: 'Домантас Пялайтис',
+        author2Position: 'Технический директор',
+        author3Name: 'Андрей Лазуткин',
+        author3Position: 'Разработчик',
+        products: "Продукты",
+        productsSubtitle: "Доверяют ведущие игроки крипторынка!",
+        kycTitle: "KYC Проверка",
+        kycDescription: "Проводите безопасную и быструю верификацию клиентов с помощью нашей автоматизированной системы KYC, соответствующей международным стандартам.",
+        kycFeature1Title: "Повысьте доверие к вашему бизнесу",
+        kycFeature1Text: "Надёжная проверка укрепляет доверие пользователей.",
+        kycFeature2Title: "Круглосуточная поддержка",
+        kycFeature2Text: "Наши специалисты всегда готовы помочь вашим пользователям.",
+        amlTitle: "CleanCryptoCoins Проверка",
+        amlDescription: "Снижайте риски с помощью автоматической CleanCryptoCoins проверки, отслеживающей источники и маршруты криптовалют для предотвращения мошенничества.",
+        amlFeature1Title: "Проверка источника транзакций",
+        amlFeature1Text: "Подтверждаем легитимность отправителей средств.",
+        amlFeature2Title: "Верификация конечных получателей",
+        amlFeature2Text: "Проверяйте получателей средств для снижения рисков.",
+        nodeTitle: 'Выделенный Узел',
+        nodeSubtitle: 'Приватный сервер с индивидуальными настройками',
+        requestsLabel: 'Запросы',
+        requestsValue: 'Безлимитные',
+        rateLabel: 'Лимит скорости',
+        rateValue: 'Неограниченный',
+        dataLabel: 'Данные',
+        dataValue: 'Архивные',
+        pricePrefix: 'От',
+        priceSuffix: '$ в месяц',
+        pricingTitle: "Стоимость услуг",
+        pricingSubtitle: "Широкий выбор для любого бизнеса",
+        annualTitle: "CleanCryptoCoins на 1 год",
+        annualDescription: "Долгосрочное решение для крупных организаций с пакетной проверкой",
+        annualPeriod: "на 12 месяцев",
+        featureUnlimited: "Неограниченные проверки",
+        featureUnlimitedDesc: "Проверяйте столько транзакций, сколько нужно",
+        selectPlan: "Подключить подписку",
+        mostPopular: "Самый популярный",
+        trialTitle: "Подписка на 1 месяц",
+        trialDescription: "Проверяйте транзакции по мере необходимости. Подходит для частных лиц.",
+        trialPeriod: "1 бесплатная проверка",
+        startTrial: "Начать пробный период",
+        perTransactionTitle: "CleanCryptoCoins за транзакцию",
+        perTransactionDescription: "Платите только за проверенные транзакции. Идеально для малого бизнеса.",
+        perTransactionPeriod: "за транзакцию",
+        getStarted: "Начать",
+        activeUsers: "Активные пользователи",
+        apiRequests: "API запросов обрабатывается ежемесячно",
+        companyLaunched: "Основание компании",
         
-    }
-}
+        // Analysis
+        analysisTitle: "Аналитика",
+        analysisSubtitle: "Анализируйте и улучшайте процессы для повышения безопасности и эффективности вашего бизнеса.",
+        kycVerification: "KYC Верификация",
+        kycVerificationDesc: "Проверка личности клиентов для соблюдения нормативных требований и снижения рисков.",
+        amlCompliance: "CleanCryptoCoins Соответствие",
+        amlComplianceDesc: "Автоматизация противодействия отмыванию денег через мониторинг транзакций.",
+        cryptoAnalysis: "Анализ криптотранзакций",
+        cryptoAnalysisDesc: "Получайте отчеты о переводах криптовалют для предотвращения преступлений.",
+        riskReduction: "Снижение рисков",
+        riskReductionDesc: "Оценивайте риски работы с новыми партнерами с помощью наших инструментов.",
+        rapidIntegration: "Быстрая интеграция",
+        rapidIntegrationDesc: "Внедряйте решения с минимальными задержками и максимальной эффективностью.",
 
-@media (max-width: 450px) {
-    .partners {
-        padding:0;
-        max-width: 350px;
-    }
 
-    .partners-slider {
-        overflow: hidden;
-        position: relative;
-        padding:0;
+        activeUsers: 'Активные Пользователи',
+         apiRequests: 'Обработано API запросов в месяц',
+        companyLaunched: 'Компания Основана',
 
-    }
+        analysisTitle: "Аналитика",
+        analysisSubtitle: "Анализируйте и улучшайте процессы для повышения безопасности и эффективности вашего бизнеса.",
+        
+        // Карточки первого ряда
+        kycVerification: "KYC Верификация",
+        kycVerificationDesc: "Проверка личности клиентов для соблюдения нормативных требований и минимизации рисков.",
+        amlCompliance: "CleanCryptoCoins Соответствие",
+        amlComplianceDesc: "Автоматизация противодействия отмыванию денег через мониторинг транзакций.",
+        cryptoAnalysis: "Анализ криптотранзакций",
+        cryptoAnalysisDesc: "Получение отчетов о переводах криптовалют для предотвращения преступлений.",
+        
+        // Широкие карточки
+        riskReduction: "Снижение рисков",
+        riskReductionDesc: "Оценка рисков работы с новыми партнерами с помощью наших инструментов.",
+        rapidIntegration: "Быстрая интеграция",
+        rapidIntegrationDesc: "Внедрение решений с минимальными задержками и максимальной эффективностью.",
 
-    /* .products {
-        padding-left: 0;
-        padding-right: 0;
-    } */
+        companyTitle: " CleanCrypto Secure", // название бренда оставляем
+        teamDesc: "Обеспечиваем безопасное будущее криптотранзакций",
+        
+        // Карточки решений
+        monitorTitle: "Мониторинг в реальном времени",
+        monitorDesc: "Продвинутая аналитика блокчейна с мгновенными оповещениями",
+        reportsTitle: "Умная отчетность",
+        reportsDesc: "Автоматизированная документация соответствия",
+        verifyTitle: "Проверка личности",
+        verifyDesc: "Безопасная верификация за минуты",
+        riskTitle: "Прогнозирующий риск-менеджер",
+        riskDesc: "Обнаружение и предотвращение угроз на ИИ",
+        screeningTitle: "Глобальная проверка",
+        screeningDesc: "Проверка санкций и PEP-лиц в реальном времени",
 
-    .pricing-grid {
-        display: flex;
-        flex-direction: column;
+
+        riskDesc: "Обнаружение и предотвращение угроз на ИИ",
+    screeningTitle: "Глобальная проверка",
+    screeningDesc: "Проверка санкций и PEP-лиц в реальном времени",
+
+
+    monitorTitle: "Мониторинг в реальном времени",
+        monitorDesc: "Продвинутая аналитика блокчейна с мгновенными оповещениями",
+        reportsTitle: "Умная отчетность",
+        reportsDesc: "Автоматизированная документация соответствия",
+        verifyTitle: "Проверка личности",
+        verifyDesc: "Безопасная верификация за минуты",
+        riskTitle: "Прогнозирующий риск-менеджер",
+        riskDesc: "Обнаружение и предотвращение угроз на ИИ",
+        screeningTitle: "Глобальная проверка",
+        screeningDesc: "Проверка санкций и PEP-лиц в реальном времени",
+
+        startCheckingTitle: "Начните проверять платежи уже сегодня",
+        startCheckingDesc: "Подайте заявку на подключение и начните проверять криптовалюту прямо сейчас!",
+        checkWallet: "Проверить кошелек",
+        channelsTitle: "Наши контактные каналы",
+        channelsSubtitle: "Свяжитесь с нашей поддержкой 24/7",
+        contactTelegram: "Чат в Telegram",
+        contactDiscord: "Сервер в Discord",
+        contactEmail: "Поддержка по Email",
+        contactWhatsapp: "Поддержка в WhatsApp",
+        companyYear: "© CleanCryptoCoins Secure. С 2021 года",
+        legalPrivacy: "Политика конфиденциальности"
+
+        
+
+        
+        
+        }
+    };
+
+    function changeLanguage(lang) {
+        if (!translations[lang]) return;
+    
+        document.querySelectorAll("[data-translate]").forEach((element) => {
+            const key = element.getAttribute("data-translate");
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+    
+        // Сохраняем выбор языка в localStorage
+        localStorage.setItem("selectedLanguage", lang);
     }
     
-    .start-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-}
-
-@media (max-width: 768px) {
-
-    .partners {
-        padding:0;
-    }
-
-    .partners-slider {
-        overflow: hidden;
-        position: relative;
-        padding:0;
-        max-width: 400px;
-    }
-
-    .header-container {
-        padding: 0 1rem;
-    }
-
-    .nav-menu {
-        display: none;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .features-grid {
-        gap: 0.75rem;
-    }
-
-    .feature-badge {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    .partners-title {
-        font-size: 2rem;
-    }
-
-    .partner-logo-image {
-        width: 180px;
-        height: 120px;
-    }
-
-    .partners-track {
-        gap: 2rem;
-    }
-}
-
-
-.dedicated-node {
-    background-color:  var(--white);
-    padding: 4rem 2rem;
-    width: 100%;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.dedicated-node::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
-    z-index: 1;
-}
-
-.dedicated-node-container {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-}
-
-.node-content {
-    color: white;
-    text-align: left;
-    padding: 2rem;
-}
-
-.node-title {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, #4CAF50, #81C784);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.node-subtitle {
-    font-size: 1.4rem;
-    color: #000000;
-    margin-bottom: 3rem;
-    opacity: 0.8;
-}
-
-.node-features {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.feature-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    min-width: 200px;
-}
-
-.feature-divider {
-    width: 1px;
-    height: 40px;
-    background-color: rgba(76, 175, 80, 0.3);
-}
-
-.feature-label {
-    color: #000000;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.feature-value {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: rgb(0, 0, 0);
-}
-
-.node-pricing {
-    margin: 3rem 0;
-}
-
-.price-wrapper {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-}
-
-.price-prefix {
-    font-size: 1.2rem;
-    color: #000000;
-}
-
-.price-amount {
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #4CAF50;
-}
-
-.price-suffix {
-    font-size: 1.2rem;
-    color: #000000;
-}
-
-.node-actions {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.btn-learn-more, .btn-get-started {
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-learn-more {
-    background-color: transparent;
-    border: 2px solid #4CAF50;
-    color: #4CAF50;
-}
-
-.btn-get-started {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-}
-
-.btn-learn-more:hover {
-    background-color: rgba(76, 175, 80, 0.1);
-}
-
-.btn-get-started:hover {
-    background-color: #43A047;
-}
-
-@media (max-width: 768px) {
-    .node-features {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    // Получаем сохранённый язык при загрузке страницы
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedLang = localStorage.getItem("selectedLanguage") || "en"; // По умолчанию - английский
+        changeLanguage(savedLang); // Перевести при загрузке
     
-    .feature-divider {
-        width: 100%;
-        height: 1px;
-    }
+        // Добавляем обработчики кликов на кнопки смены языка
+        document.querySelectorAll(".language-option").forEach((option) => {
+            option.addEventListener("click", () => {
+                const selectedLang = option.getAttribute("data-lang");
+                changeLanguage(selectedLang);
     
-    .node-title {
-        font-size: 2.5rem;
+                // 🛠️ Переводим блок `solutions` принудительно после смены языка
+                setTimeout(() => {
+                    document.querySelectorAll("[data-translate]").forEach((element) => {
+                        const key = element.getAttribute("data-translate");
+                        if (translations[selectedLang] && translations[selectedLang][key]) {
+                            element.textContent = translations[selectedLang][key];
+                        }
+                    });
+                }, 50); // Короткая задержка на прогрузку
+            });
+        });
+    });
+
+    // Функция установки языка
+    function setLanguage(lang) {
+        // Сохраняем выбранный язык
+        localStorage.setItem('selectedLanguage', lang);
+        
+        // Обновляем отображение текущего языка
+        const currentLang = document.querySelector('.current-lang');
+        if (currentLang) {
+            currentLang.textContent = lang.toUpperCase();
+        }
+        
+        // Обновляем все переводимые элементы
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
     }
+
+    // Управление языковым меню
+    const languageToggle = document.getElementById('languageToggle');
+    const languageMenu = document.getElementById('languageMenu');
+    const languageOptions = document.querySelectorAll('.language-option');
+
+    function toggleLanguageMenu(show) {
+        if (!languageToggle || !languageMenu) return;
+        
+        languageToggle.setAttribute('aria-expanded', show);
+        languageMenu.setAttribute('aria-hidden', !show);
+        languageMenu.style.display = show ? 'block' : 'none';
+        
+        if (show && languageOptions.length > 0) {
+            languageOptions[0].focus();
+        }
+    }
+
+    // Обработчики событий для переключения языка
+    if (languageToggle) {
+        languageToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isExpanded = languageToggle.getAttribute('aria-expanded') === 'true';
+            toggleLanguageMenu(!isExpanded);
+        });
+    }
+
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            setLanguage(lang);
+            toggleLanguageMenu(false);
+        });
+    });
+
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', (e) => {
+        if (languageMenu && !languageMenu.contains(e.target) && 
+            !languageToggle?.contains(e.target)) {
+            toggleLanguageMenu(false);
+        }
+    });
+
+    // Функциональность кнопки кошелька
+    const walletBtns = document.querySelectorAll('.wallet-btn, .header-wallet-btn, .check-wallet-btn');
     
-    .price-amount {
-        font-size: 2.5rem;
-    }
-    
-    .node-actions {
-        flex-direction: column;
-    }
-    
-    .btn-learn-more, .btn-get-started {
-        width: 100%;
-    }
-}
-
-.support-option {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: #45B36B !important;
-}
-
-.support-option .lang-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-}
-
-.support-option:hover {
-    background-color: rgba(69, 179, 107, 0.1);
-}
-
-
-.statistics {
-    width: 100%;
-    padding: 4rem 2rem;
-    background-color: #FFFFFF;
-}
-
-.statistics-container {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.stats-grid {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.stat-card {
-    background: #FFFFFF;
-    border-radius: 24px;
-    padding: 2rem;
-    min-width: 300px;
-    text-align: left;
-    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.08);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-.stat-icon {
-    color: #4CAF50;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.stat-icon i {
-    background: linear-gradient(45deg, #4CAF50, #81C784);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #4CAF50;
-    line-height: 1.2;
-}
-
-.stat-label {
-    font-size: 1.1rem;
-    color: #757575;
-    margin-top: 0.5rem;
-    line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-    .stats-grid {
-        flex-direction: column;
-    }
-
-    .stat-card {
-        width: 100%;
-        min-width: auto;
-    }
-}
-
-
-.testimonials {
-    padding: 40px 0;
-    background-color: #f8f9fa;
-    overflow: hidden;
-}
-
-.testimonials-container {
-    text-align: center;
-            max-width: 1400px; /* Ограничение максимальной ширины контейнера */
-            width: 100%;
+    walletBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            if (!btn.querySelector('span')) return;
             
-            margin: 0 auto;
-    overflow: hidden; 
+            btn.classList.add('loading');
+            const originalText = btn.querySelector('span').textContent;
+            const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+            btn.querySelector('span').textContent = translations[currentLang].wallet;
 
-    padding: 20px;/* Убедимся, что контейнер занимает всю ширину на мобильных устройствах */
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    line-height: 1.3;
-    color: #1a1a1a;
-}
-
-.x-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: #000;
-    border-radius: 50%;
-    color: #fff;
-    font-style: normal;
-}
-
-.testimonials-slider {
-    position: relative;
-    overflow: hidden;
-    padding: 2rem 0;
-    min-height: 300px; /* Убедитесь, что высота достаточна */
-    /* position: relative;
-    overflow: hidden; */
-}
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                btn.classList.remove('loading');
+                btn.classList.add('success');
+                btn.querySelector('span').textContent = currentLang === 'en' ? 'Connected' : 'Подключено';
+                
+                setTimeout(() => {
+                    btn.classList.remove('success');
+                    btn.querySelector('span').textContent = originalText;
+                }, 2000);
+            } catch (error) {
+                btn.classList.remove('loading');
+                btn.classList.add('error');
+                btn.querySelector('span').textContent = currentLang === 'en' ? 'Failed' : 'Ошибка';
+                
+                setTimeout(() => {
+                    btn.classList.remove('error');
+                    btn.querySelector('span').textContent = originalText;
+                }, 2000);
+            }
+        });
+    });
 
 
-.testimonials-track {
-    display: flex;
-    gap: 20px;
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // Отменяем стандартное поведение ссылки
+
+            const targetId = this.getAttribute('href').substring(1); // Получаем id цели
+            const targetElement = document.getElementById(targetId); // Находим элемент по id
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth', // Плавная прокрутка
+                    block: 'start' // Прокрутка к началу элемента
+                });
+            }
+        });
+    });
+
+    // Эффект прокрутки для header
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        if (!header) return;
+        
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            header.classList.remove('scroll-up');
+            return;
+        }
+
+        if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
+            header.classList.remove('scroll-up');
+            header.classList.add('scroll-down');
+        } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
+            header.classList.remove('scroll-down');
+            header.classList.add('scroll-up');
+        }
+        lastScroll = currentScroll;
+    });
+
+    // Эффекты при наведении на навигацию
+    const navLinks = document.querySelectorAll('.nav-link');
     
-    transform: translateX(0);
-    transition: transform 0.5s ease;
-}
+    navLinks.forEach(link => {
+        link.addEventListener('mouseover', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            
+            let indicator = this.querySelector('.nav-indicator');
+            if (!indicator) {
+                indicator = document.createElement('span');
+                indicator.className = 'nav-indicator';
+                this.appendChild(indicator);
+            }
+            
+            indicator.style.width = `${this.offsetWidth}px`;
+        });
 
-.testimonial-card {
-    --primary-light: #e6f7eb; /* Светло-зелёный */
-    --primary-medium: #c8f0d9; /* Средне-зелёный */
+        link.addEventListener('mouseout', function() {
+            this.classList.remove('active');
+            const indicator = this.querySelector('.nav-indicator');
+            if (indicator) {
+                indicator.style.width = '0';
+            }
+        });
+    });
 
-    flex: 0 0 400px;
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-medium) 100%);
-    border-radius: 10px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Центрирование всего контента */
-    text-align: center;
-    width: 300px;
-    min-width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-}
-
-.company-logo {
-    height: 50px;
-    object-fit: contain;
-    /* margin-bottom: 20px; */
-    width: 100px;
-    margin-bottom: 15px;
-}
-
-.testimonial-text {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #333;
-    flex-grow: 1;
-}
-
-.author-info {
-    display: flex;
-    font-size: 12px;
-    flex-direction: column;
-    gap: 0.25rem;
-}
+    // Инициализация языка
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    setLanguage(savedLanguage);
+});
 
 
-@keyframes scrollTestimonials {
-    /* ... */
-}
+const carouselInner = document.querySelector('.carousel-inner');
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+const dots = document.querySelectorAll('.dot');
 
-.testimonials-track {
-    animation: scrollTestimonials 30s linear infinite;
-}
+let currentPosition = 0;
 
-.author-name {
-    font-weight: bold;
-    color: #1a1a1a;
-}
+nextButton.addEventListener('click', () => {
+  currentPosition = (currentPosition + 1) % testimonialCards.length;
+  updateCarousel();
+});
 
-/* Общие стили */
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9fa;
-  }
-  
-  .reviews {
-    max-width: 100%;
-    width: 100vw;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .reviews__container {
-    max-width: 1200px;
-    width: 90%;
-    margin: 0 auto;
-  }
-  
-  .reviews__title {
-    text-align: center;
-    font-size: 24px;
-    line-height: 1.4;
-    color: #333;
-    margin-bottom: 40px;
-  }
-  
-  .slider {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-  
-  .slider__track {
-    display: flex;
-    transition: transform 300ms ease-in-out;
-  }
-  
-  .card {
-    min-width: 250px;
-    max-width: 400px;
-    flex-shrink: 0;
-    margin-right: 10px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+prevButton.addEventListener('click', () => {
+  currentPosition = (currentPosition - 1 + testimonialCards.length) % testimonialCards.length;
+  updateCarousel();
+});
 
+function updateCarousel() {
+  carouselInner.style.transform = `translateX(-${currentPosition * 100}%)`;
 
-
-
-
-  .testimonials-section {
-    padding: 40px 20px;
-    background-color: #f8f8f8;
-    font-family: sans-serif;
-  }
-  
-  .testimonials-container {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  
-  .section-heading {
-    font-size: 2em;
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-  }
-  
-  .carousel {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .testimonial-card {
-    flex: 0 0 100%;
-    padding: 30px;
-    border: none;
-    box-sizing: border-box;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .client-logo {
-    max-width: 150px;
-    height: auto;
-    display: block;
-    margin: 0 auto; /* Центрирование по горизонтали */
-    object-fit: contain; /* Поддерживает соотношение сторон */
-}
-  
-  .testimonial-text {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    color: #555;
-    line-height: 1.5;
-  }
-  
-  .client-info {
-    text-align: right;
-  }
-  
-  .client-name {
-    font-weight: bold;
-    margin-right: 10px;
-    color: #333;
-  }
-  
-  .client-role {
-    color: #777;
-  }
-  
-  .carousel-controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-  }
-  
-  .prev-button,
-  .next-button {
-    visibility: hidden;
-  }
-  
-  .prev-button:hover,
-  .next-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .dot {
-    width: 12px;
-    height: 12px;
-    margin: 0 6px;
-    border-radius: 50%;
-    background-color: #ddd;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dot:hover {
-    background-color: #aaa;
-  }
-  
-  .dot.active {
-    background-color: #333;
-  }
-  
-  /* Медиа-запросы для адаптивности */
-  @media (max-width: 768px) {
-    .section-heading {
-      font-size: 1.5em;
+  // Обновляем активную точку
+  dots.forEach((dot, index) => {
+    if (index === currentPosition) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
     }
-  
-    .testimonial-text {
-      font-size: 1em;
+  });
+}
+
+// Добавляем возможность переключения свайпом
+let touchStartX = 0;
+
+carouselInner.addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+});
+
+carouselInner.addEventListener('touchmove', (e) => {
+  if (!touchStartX) return;
+
+  const touchCurrentX = e.touches[0].clientX;
+  const diffX = touchStartX - touchCurrentX;
+
+  if (Math.abs(diffX) > 50) { // Adjust the threshold as needed
+    if (diffX > 0) {
+      nextButton.click();
+    } else {
+      prevButton.click();
     }
-  
-    .carousel-controls {
-      left: 50%;
-      transform: translateX(-50%);
-      flex-direction: row;
-      bottom: 20px;
-      top: auto;
-    }
-  
-    .prev-button,
-    .next-button {
-      margin: 0 5px;
-    }
+    touchStartX = 0;
   }
-  
-  @media (min-width: 769px) {
-    .carousel-controls {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      z-index: 10;
-    }
-  
-    .prev-button,
-    .next-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      margin: 5px 0;
-    }
-  
-    .prev-button {
-      left: 0;
-    }
-  
-    .next-button {
-      right: 0;
-    }
-  }
-  
-  
-  .card__logo {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    margin: 0 auto 20px;
-  }
-  
-  .card__text {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 30px;
-  }
-  
-  .card__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .card__name {
-    font-weight: bold;
-    font-size: 18px;
-    color: #444;
-    margin-bottom: 5px;
-  }
-  
-  .card__position {
-    font-style: italic;
-    font-size: 14px;
-    color: #888;
-  }
-  
-  .slider__dots {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .slider__dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #ccc;
-    cursor: pointer;
-    margin: 0 5px;
-  }
-  
-  .slider__dot.active {
-    background-color: #007bff;
-  }
-  
-  /* Медиа-запросы для адаптивности */
-  @media screen and (max-width: 768px) {
-    .reviews__title {
-      font-size: 22px;
-    }
-    
-    .card {
-      min-width: 200px;
-      max-width: 320px;
-    }
-    
-    .card__logo {
-      width: 60px;
-      height: 60px;
-    }
-    
-    .card__text {
-      font-size: 14px;
-    }
-    
-    .card__name {
-      font-size: 16px;
-    }
-    
-    .card__position {
-      font-size: 12px;
-    }
-  }
+});
 
-.review-section {
-    padding: 2rem 1rem;
-    overflow: hidden;
-  }
-  
-  .main-heading {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-  }
-  
-  .carousel-container {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    max-width: 1200px;
-  }
-  
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-out;
-  }
-  
-  .feedback-card {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    padding: 1.5rem;
-    background: #f5f5f5;
-    border-radius: 12px;
-    margin: 0 1rem;
-    min-height: 300px;
-    box-sizing: border-box;
-    position: relative;
-  }
-  
-  .brand-logo {
-    height: 40px;
-    margin-bottom: 1rem;
-    object-fit: contain;
-    max-width: 150px;
-  }
-  
-  .feedback-text {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    min-height: 120px;
-  }
-  
-  .user-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    gap: 0.75rem;
-  }
-  
-  .carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #ddd;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .carousel-dot.active {
-    background: #333;
-  }
-  
-  @media (min-width: 480px) {
-    .feedback-card {
-      flex: 0 0 calc(50% - 2rem);
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .feedback-card {
-      flex: 0 0 calc(33.333% - 2rem);
-    }
-  }
-
-
-.author-position {
-    font-size: 0.9rem;
-    color: #666;
-    display: block;
-    margin-top: 5px;
-}
-
-.explore-more {
-    margin-top: 3rem;
-    text-align: right;
-}
-
-.explore-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    color: #4169e1;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.explore-link:hover {
-    color: #2749c4;
-}
+// Добавляем возможность переключения по точкам
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    currentPosition = index;
+    updateCarousel();
+  });
+});
 
 
 
-.contact-channels {
-    padding: 6rem 2rem;
-    margin-top: 10px;
-    background: var(--white);
-    position: relative;
-}
-
-.contact-channels::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(40, 167, 69, 0.1),
-        transparent
-    );
-}
-
-.contact-channels-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.contact-channels-heading {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    position: relative;
-    display: inline-block;
-}
-
-.contact-channels-heading::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: var(--primary-color);
-    border-radius: 2px;
-}
-
-.contact-channels-text {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    margin-bottom: 4rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.social-buttons-grid {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    max-width: 800px;
-}
-
-.social-connect-btn {
-    flex: 1;
-    min-width: 240px;
-    max-width: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--white);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.social-connect-btn i {
-    font-size: 16px;
-}
-
-.social-connect-btn span {
-    margin-left: 8px; /* Уменьшите значение по вашему усмотрению */
-}
-
-.social-connect-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0);
-    transition: all 0.3s ease;
-}
-
-.social-connect-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.social-connect-btn:hover::before {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.tg-connect {
-    background: linear-gradient(135deg, #37AEE2 0%, #1E96C8 100%);
-}
-
-.dc-connect {
-    background: linear-gradient(135deg, #7289DA 0%, #5B6EAE 100%);
-}
-
-.wa-connect {
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-}
-
-/* Bottom Info Styles */
-.bottom-info {
-    background: var(--bg-light);
-    padding: 2rem;
-    position: relative;
-}
-
-.bottom-info-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.bottom-info-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
-}
-
-.company-info {
-    color: var(--text-light);
-}
-
-.company-year {
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
-.legal-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.legal-link {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-    padding-bottom: 3px;
-}
-
-.legal-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.legal-link:hover {
-    color: var(--primary-color);
-}
-
-.legal-link:hover::after {
-    width: 100%;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .contact-channels-heading {
-        font-size: 2.5rem;
-    }
-    
-    .contact-channels-text {
-        font-size: 1.1rem;
-        margin-bottom: 3rem;
-    }
-    
-    .social-buttons-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .social-connect-btn {
-        width: 100%;
-    }
-    
-    .bottom-info-content {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-    }
-}
-
-
-
-@media (max-width: 480px) {
-    .contact-channels {
-        padding: 4rem 1rem;
-    }
-    
-    .contact-channels-heading {
-        font-size: 2rem;
-    }
-    
-    .social-connect-btn {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-400px * 3 - 6rem));
-    }
-}
-
-@media (max-width: 768px) {
-    .section-title {
-        font-size: 1.8rem; /* Уменьшаем размер шрифта для лучшей читаемости на мобильных устройствах */
-        margin-bottom: 2rem;
-    }
-
-    .testimonial-card {
-        flex: 0 0 300px;
-    }
-}
-
-
-.email-connect {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #28a745, #218838); /* Градиент зелёных оттенков */
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 12px 20px;
-    border-radius: 8px; /* Закругление краёв */
-    text-decoration: none;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.email-connect i {
-    font-size: 20px;
-}
-
-.email-connect:hover {
-    background: linear-gradient(135deg, #218838, #1e7e34); /* Затемнённый градиент */
-    transform: scale(1.05); /* Лёгкое увеличение */
-}
-
-.email-connect:active {
-    transform: scale(0.95); /* Кнопка слегка нажимается */
-}
